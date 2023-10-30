@@ -8,6 +8,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<DbContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")); // pobranie connection stringa z appsettingsow
+
 });
 builder.Services.AddCors(options => // pozwala na dostep do zasobow z innych domen
 //cors to cross origin resources sharing
