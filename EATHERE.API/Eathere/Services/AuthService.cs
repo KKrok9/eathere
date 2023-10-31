@@ -29,7 +29,7 @@ namespace Eathere.Services
             return authenticatedUser;
         }
 
-        public async string CreateToken(User user)
+        public string CreateToken(User user)
         {
             List<Claim> claims = new List<Claim>
             {
