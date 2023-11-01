@@ -4,7 +4,7 @@ import { LoginPageComponent } from './modules/auth/containers/login-page/login-p
 import { RegisterPageComponent } from './modules/auth/containers/register-page/register-page.component';
 
 const routes: Routes = [
-    { path: 'login', component: LoginPageComponent },
+    { path: '', component: LoginPageComponent },
     { path: 'register', component: RegisterPageComponent }
 ];
 

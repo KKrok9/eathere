@@ -1,0 +1,84 @@
+.container {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    display: flex;
+    flex-direction: row;
+
+    .left-side-container {
+        height: 100%;
+        width: 65%;
+        background-image: url('../../../../../assets/images/login-image.jpg');
+        background-size: cover;
+    }
+
+    .right-side-container {
+        height: 100%;
+        width: 35%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #36A9AE;
+        background-image: linear-gradient(#37ADB2, #329CA0);
+
+        .login-container {
+            height: 40%;
+            width: 60%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: white;
+            border-radius: 12px;
+
+            .login-header-container {
+                height: 30%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 100%;
+            }
+
+            .login-data-container {
+                height: 50%;
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+
+            }
+
+            .login-button-container {
+                width: 100%;
+                height: 20%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                .login-button {
+                    background-color: #36A9AE;
+                    background-image: linear-gradient(#37ADB2, #329CA0);
+                    border: 1px solid #2A8387;
+                    border-radius: 4px;
+                    box-shadow: rgba(0, 0, 0, 0.12) 0 1px 1px;
+                    color: #FFFFFF;
+                    cursor: pointer;
+                    display: block;
+                    font-family: -apple-system, ".SFNSDisplay-Regular", "Helvetica Neue", Helvetica, Arial, sans-serif;
+                    font-size: 17px;
+                    line-height: 100%;
+                    margin: 0;
+                    outline: 0;
+                    padding: 11px 15px 12px;
+                    text-align: center;
+                    transition: box-shadow .05s ease-in-out, opacity .05s ease-in-out;
+                    user-select: none;
+                    -webkit-user-select: none;
+                    touch-action: manipulation;
+                    width: 30%;
+                }
+
+            }
+        }
+    }
+}
