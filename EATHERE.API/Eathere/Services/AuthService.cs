@@ -18,7 +18,7 @@ namespace Eathere.Services
         public AuthService(ISqlRepository<User> repository, IConfiguration configuration)
         {
             _repository = repository;
-            _configuration = configuration
+            _configuration = configuration;
         }
 
         public async Task<User?> AuthenticateUser(User user)
@@ -35,7 +35,12 @@ namespace Eathere.Services
             {
                 new Claim(ClaimTypes.Name, user.Email)
             };
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration.GetSection("AppSetings:Token").Value!));
+            var tokenValue = _configuration.GetSection("AppSettings:Token").Value;
+            if (tokenValue == null)
+            {
+                throw new InvalidOperationException("Token value is missing in configuration.");
+            }
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(tokenValue));
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
             var token = new JwtSecurityToken(
                  claims: claims,

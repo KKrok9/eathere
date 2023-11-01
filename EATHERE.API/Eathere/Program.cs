@@ -1,15 +1,21 @@
+using Eathere.SqlRepository;
 using Microsoft.EntityFrameworkCore;
+using Eathere.Services.Interfaces;
+using Eathere.Services;
+using Eathere.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>(); //Pozwala na dostep do http context
 //builder.Services.AddCustomServices(builder.Configuration);
-builder.Services.AddSwaggerGen();
-builder.Services.AddDbContext<DbContext>(options =>
+//--REGISTERING SERVICES---
+builder.Services.AddDbContext<DataContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")); // pobranie connection stringa z appsettingsow
 
 });
+builder.Services.AddScoped(typeof(ISqlRepository<>), typeof(SqlRepository<>));
+builder.Services.AddTransient<IAuthService, AuthService>();
 builder.Services.AddCors(options => // pozwala na dostep do zasobow z innych domen
 //cors to cross origin resources sharing
 {
@@ -21,7 +27,6 @@ builder.Services.AddCors(options => // pozwala na dostep do zasobow z innych dom
     });
 });
 builder.Services.AddControllers(); // dodaje kontrolery 
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer(); //obsluga api exploreer
 builder.Services.AddSwaggerGen(); // dokumentacja api w oparciu o atrybuty i komentarze w kodzie
 
