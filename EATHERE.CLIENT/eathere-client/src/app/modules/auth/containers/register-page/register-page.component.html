@@ -1,28 +1,29 @@
 <div class="container">
     <div class="left-side-container">
     </div>
+
     <div class="right-side-container">
-        <div class="register-container">
+        <form [formGroup]="fg" (ngSubmit)="register()" class="register-container">
             <div class="register-header-container">
                 <h1>REGISTER</h1>
             </div>
             <div class="register-data-container">
                 <div class="">
                     <p class="h">Name</p>
-                    <input class="email-input">
+                    <input formControlName="name" class="email-input">
                 </div>
                 <div class="">
                     <p class="">Surname</p>
-                    <input class="email-input">
+                    <input formControlName="surname" class="email-input">
                 </div>
                 <div class="">
                     <p class="">Email</p>
-                    <input class="email-input">
+                    <input formControlName="email" class="email-input">
                 </div>
 
                 <div class="">
                     <p class="">Password</p>
-                    <input class="password-input">
+                    <input formControlName="password" class="password-input">
                 </div>
 
                 <div class="">
@@ -30,17 +31,13 @@
                     <input class="password-input">
                 </div>
                 <div class="">
-                    <p class="">Are you resaurant owner?</p>
-                    <input type="checkbox" class="password-input">
-                </div>
-                <div class="">
-                    <p class="">Restaurant name</p>
-                    <input class="password-input">
+                    <p class="">Are you restaurant owner?</p>
+                    <input formControlName="isRestaurantOwner" type="checkbox">
                 </div>
             </div>
             <div class="register-button-container">
-                <button class="register-button">Register</button>
+                <button type="submit" class="register-button">Register</button>
             </div>
-        </div>
+        </form>
     </div>
 </div>

@@ -22,22 +22,29 @@ namespace Eathere.Controllers
         [HttpPost("Register")]
         public async Task<ActionResult> Register(User user)
         {
-            _authService.Register(user);
+            await _authService.Register(user);
             return Ok(new { message = "Registered succesfully!" });
         }
 
         [HttpPost("Login")]
-        public async Task<ActionResult> Login(User user)// change to login dto
+        public async Task<ActionResult> Login(LoginDto user)
         {
-            var autenticatedUser = _authService.AuthenticateUser(user);
-            if(autenticatedUser == null)
+            var autenticatedUser = await _authService.AuthenticateUser(user);
+            if (autenticatedUser == null)
             {
                 return Unauthorized("Wrong login or password!");
             }
-            var token = _authService.CreateToken(user);
-            return Ok((new {jwt = token}));
+            var token = _authService.CreateToken(autenticatedUser);
+            return Ok(new { jwt = token });
         }
-        
+
+        [Authorize]//need to be authorized to use it
+        [HttpGet("GetMyId")]
+        public IActionResult GetMyId()
+        {
+            return Ok(_authService.GetCurrentUserId());
+        }
+
 
     }
 }

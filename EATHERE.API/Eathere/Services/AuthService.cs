@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
+using Eathere.DTOs;
 
 namespace Eathere.Services
 {
@@ -14,14 +15,15 @@ namespace Eathere.Services
     {
         private readonly ISqlRepository<User> _repository;
         private readonly IConfiguration _configuration;
-
-        public AuthService(ISqlRepository<User> repository, IConfiguration configuration)
+        private readonly IHttpContextAccessor _httpContextAccessor;
+        public AuthService(ISqlRepository<User> repository, IConfiguration configuration, IHttpContextAccessor httpContextAccessor)
         {
             _repository = repository;
             _configuration = configuration;
+            _httpContextAccessor = httpContextAccessor;
         }
 
-        public async Task<User?> AuthenticateUser(User user)
+        public async Task<User?> AuthenticateUser(LoginDto user)
         {
             var users = await _repository.GetAllAsync();
             var hashedPassword = BCrypt.Net.BCrypt.HashPassword(user.Password);
@@ -53,8 +55,27 @@ namespace Eathere.Services
 
         public Guid? GetCurrentUserId()
         {
-            throw new NotImplementedException();
+            var authHeader = _httpContextAccessor.HttpContext.Request.Headers["Authorization"];
+            var tokenString = authHeader.FirstOrDefault()?.Split(' ').Last();
+
+            if (tokenString == null)
+            {
+                return null;
+            }
+
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var token = tokenHandler.ReadJwtToken(tokenString);
+
+            var userIdClaim = token.Claims.FirstOrDefault(c => c.Type == "userId");
+
+            if (userIdClaim == null || !Guid.TryParse(userIdClaim.Value, out Guid userId))
+            {
+                return null;
+            }
+
+            return userId;
         }
+
 
         public async Task<User> Register(User user)
         {
@@ -65,7 +86,7 @@ namespace Eathere.Services
                 throw new Exception("Użytkownik o podanym emailu już istnieje.");
             }
             string passwordHash = BCrypt.Net.BCrypt.HashPassword(user.Password);
-            _repository.AddAsync(user);
+            await _repository.AddAsync(user);
             return user; ;
         }
 

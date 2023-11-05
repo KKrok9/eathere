@@ -29,8 +29,17 @@ namespace Eathere.SqlRepository
 
         public async Task<IEnumerable<T>> GetAllAsync()
         {
-            return await _dbSet.ToListAsync();
+            var entities = await _dbSet.ToListAsync();
+
+            if (entities == null || !entities.Any())
+            {
+                // Możesz tutaj zwrócić odpowiednią wartość lub informację zwrotną
+                return Enumerable.Empty<T>(); // Zwraca pustą listę
+            }
+
+            return entities;
         }
+
 
         public async Task<T> GetByIdAsync(Guid id)
         {
