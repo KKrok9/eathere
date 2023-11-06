@@ -14,6 +14,7 @@ export class AppComponent {
 
     ngOnInit(): void {
         this.checkIfTokenExists();
+        console.log(this.isLoggedIn);
     }
 
 
@@ -36,5 +37,6 @@ export class AppComponent {
     logout(): void {
         this.authService.updateIsLoggedIn(false);
         localStorage.removeItem('jwt');
+        this.router.navigateByUrl('/');
     }
 }

@@ -1,3 +1,15 @@
-<div class="content">
-    <router-outlet></router-outlet>
+<div class="app-wrapper">
+    <div *ngIf="isLoggedIn==true" class="side-bar">
+        <button [routerLink]="'/home'">HOME</button>
+        <button [routerLink]="'/my-profile'">MY PROFILE</button>
+        <button [routerLink]="'/my-restaurant'">MY RESTAURANT</button>
+        <button [routerLink]="'/dishes-list'">DISHES LIST</button>
+        <button [routerLink]="'/all-orders'">ALL ORDERS</button>
+        <button [routerLink]="'/statistics'">STATS</button>
+        <button [routerLink]="'/workers'">WORKERS</button>
+        <button (click)="logout()">LOGOUT</button>
+    </div>
+    <div class="content">
+        <router-outlet></router-outlet>
+    </div>
 </div>

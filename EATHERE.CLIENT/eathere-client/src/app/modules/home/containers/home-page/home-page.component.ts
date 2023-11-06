@@ -12,10 +12,5 @@ export class HomePageComponent {
 
     }
 
-    logout(): void {
-        this.authService.updateIsLoggedIn(false);
-        this.router.navigateByUrl('/');
-        localStorage.removeItem('jwt');
-    }
 
 }
