@@ -2,27 +2,27 @@
     <div class="left-side-container">
     </div>
     <div class="right-side-container">
-        <div class="login-container">
+        <form [formGroup]="fg" (ngSubmit)="login()" class="login-container">
             <div class="login-header-container">
                 <h1>EATHERE</h1>
             </div>
             <div class="login-data-container">
                 <div class="email-container">
                     <p class="email-paragraph">Email</p>
-                    <input class="email-input">
+                    <input formControlName="email" class="email-input">
                 </div>
 
                 <div class="password-container">
                     <p class="password-paragraph">Password</p>
-                    <input class="password-input">
+                    <input formControlName="password" class="password-input">
                 </div>
             </div>
             <div class="login-button-container">
                 <button class="login-button">Login</button>
             </div>
             <div class="register-link-container">
-                <p>Doesn't have account?<a> Register here</a></p>
+                <p>Doesn't have account?<a href="/register"> Register here</a></p>
             </div>
-        </div>
+        </form>
     </div>
 </div>

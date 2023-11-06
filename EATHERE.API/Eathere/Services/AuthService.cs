@@ -27,7 +27,15 @@ namespace Eathere.Services
         {
             var users = await _repository.GetAllAsync();
             var hashedPassword = BCrypt.Net.BCrypt.HashPassword(user.Password);
-            var authenticatedUser = users.FirstOrDefault(x=> x.Email == user.Email && x.Password == hashedPassword);
+            var authenticatedUser = users.FirstOrDefault(x=> x.Email == user.Email);
+            if(authenticatedUser == null) {
+                throw new Exception("Użytkownik o podanym emailu nie istnieje.");
+            }
+            
+            if(!BCrypt.Net.BCrypt.Verify(user.Password, authenticatedUser.Password))
+            {
+                throw new Exception("Podane hasło jest niepoprawne!");
+            }
             return authenticatedUser;
         }
 
@@ -86,6 +94,7 @@ namespace Eathere.Services
                 throw new Exception("Użytkownik o podanym emailu już istnieje.");
             }
             string passwordHash = BCrypt.Net.BCrypt.HashPassword(user.Password);
+            user.Password = passwordHash;
             await _repository.AddAsync(user);
             return user; ;
         }
