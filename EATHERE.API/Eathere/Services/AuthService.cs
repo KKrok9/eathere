@@ -16,6 +16,7 @@ namespace Eathere.Services
         private readonly ISqlRepository<User> _repository;
         private readonly IConfiguration _configuration;
         private readonly IHttpContextAccessor _httpContextAccessor;
+        private Guid? _loggedInUserId;
         public AuthService(ISqlRepository<User> repository, IConfiguration configuration, IHttpContextAccessor httpContextAccessor)
         {
             _repository = repository;
@@ -43,7 +44,8 @@ namespace Eathere.Services
         {
             List<Claim> claims = new List<Claim>
             {
-                new Claim(ClaimTypes.Name, user.Email)
+                new Claim(ClaimTypes.Name, user.Email),
+                new Claim("userId", user.Id.ToString())
             };
             var tokenValue = _configuration.GetSection("AppSettings:Token").Value;
             if (tokenValue == null)
@@ -64,6 +66,7 @@ namespace Eathere.Services
         public Guid? GetCurrentUserId()
         {
             var authHeader = _httpContextAccessor.HttpContext.Request.Headers["Authorization"];
+            var tester = _httpContextAccessor.HttpContext;
             var tokenString = authHeader.FirstOrDefault()?.Split(' ').Last();
 
             if (tokenString == null)

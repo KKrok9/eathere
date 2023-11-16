@@ -1,15 +1,66 @@
-<div class="page-wrapper">
+<div *ngIf="this.user!=null" class="page-wrapper">
     <div class="page-content">
         <div class="header">
             <h1>MY PROFILE</h1>
         </div>
-        <div class="my-profile-content">
-            <div class="my-profile-element"><span class="bold">NAME AND SURNAME:</span> Kacper Krok</div>
-            <div class="my-profile-element"><span class="bold">NAME AND SURNAME:</span> kacperkrok9@gmail.com</div>
-            <div class="my-profile-element"><span class="bold">NAME AND SURNAME:</span> RESTAURANT OWNER</div>
-            <div class="my-profile-element"><span class="bold">NAME AND SURNAME:</span> 12/11/2001</div>
-            <div class="my-profile-element"><span class="bold">NAME AND SURNAME:</span> 533-717-944</div>
-            <div class="save-btn-div"><button>SAVE</button></div>
+        <div *ngIf="user.name && user.surname && !isEdit['nameAndSurname'] else enterNameAndSurname"
+            class="my-profile-element">
+            <span class="bold">NAME AND SURNAME:</span>{{user.name}} {{ user.surname}}
+            <button (click)="toggleIsToEdit('nameAndSurname')">EDIT</button>
+        </div>
+        <ng-template #enterNameAndSurname>
+            <div>
+                <p>Enter name and surname</p>
+                <input>
+            </div>
+        </ng-template>
+
+        <div *ngIf="user.email && !isEdit['email'] else enterEmail" class="my-profile-element">
+            <span class="bold">EMAIL:</span>{{user.email}}
+            <button (click)="toggleIsToEdit('email')">EDIT</button>
+        </div>
+        <ng-template #enterEmail>
+            <div>
+                <p>Enter email</p>
+                <input>
+            </div>
+        </ng-template>
+
+        <div *ngIf="user.isRestaurantOwner && !isEdit['roleInRestaurant'] else enterRoleInRestaurant"
+            class="my-profile-element">
+            <span class="bold">ROLE IN RESTAURANT:</span>{{user.isRestaurantOwner}}
+            <button (click)="toggleIsToEdit('roleInRestaurant')">EDIT</button>
+        </div>
+        <ng-template #enterRoleInRestaurant>
+            <div>
+                <p>Enter your role in restaurant</p>
+                <input>
+            </div>
+        </ng-template>
+
+        <div *ngIf="user.birthdayDate && !isEdit['birthdayDate'] else enterBirthdayDate" class="my-profile-element">
+            <span class="bold">BirthdayDate:</span>{{user.birthdayDate}}
+            <button (click)="toggleIsToEdit('birthdayDate')">EDIT</button>
+        </div>
+        <ng-template #enterBirthdayDate>
+            <div>
+                <p>Enter birthdayDate</p>
+                <input type="date">
+            </div>
+        </ng-template>
+
+        <div *ngIf="user.contactNumber && !isEdit['contectNumber'] else enterContactNumber" class="my-profile-element">
+            <span class="bold">Contact number:</span>{{user.contactNumber}}
+            <button (click)="toggleIsToEdit('email')">EDIT</button>
+        </div>
+        <ng-template #enterContactNumber>
+            <div>
+                <p>Enter your contact number</p>
+                <input>
+            </div>
+        </ng-template>
+        <div class="save-button-div">
+            <button class="save-button" (click)="saveUser()">SAVE</button>
         </div>
     </div>
 </div>

@@ -23,4 +23,6 @@ export class AuthService extends HttpRequestsService {
     updateIsLoggedIn(value: boolean): void {
         this.isLoggedIn = value;
     }
+
+
 }

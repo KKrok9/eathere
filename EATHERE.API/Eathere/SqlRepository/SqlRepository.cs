@@ -33,7 +33,6 @@ namespace Eathere.SqlRepository
 
             if (entities == null || !entities.Any())
             {
-                // Możesz tutaj zwrócić odpowiednią wartość lub informację zwrotną
                 return Enumerable.Empty<T>(); // Zwraca pustą listę
             }
 
