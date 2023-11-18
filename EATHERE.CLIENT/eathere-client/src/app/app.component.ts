@@ -14,7 +14,6 @@ export class AppComponent {
 
     ngOnInit(): void {
         this.checkIfTokenExists();
-        console.log(this.isLoggedIn);
     }
 
 

@@ -21,7 +21,6 @@ export class MyProfilePageComponent {
         roleInRestaurant: false,
         birthdayDate: false,
         contactNumber: false,
-        // Add more fields as needed
     };
 
     private subscription = new Subscription();
@@ -31,6 +30,7 @@ export class MyProfilePageComponent {
 
     ngOnInit(): void {
         this.getCurrentUser();
+        this.initializeForm();
     }
 
     private getFg(): any {
@@ -48,8 +48,7 @@ export class MyProfilePageComponent {
         this.subscription.add(
             this.userService.getCurrentlyLoggedUser().subscribe(response => {
                 this.user = response;
-                // Set default values in the form group based on user data
-                this.fg.setValue({
+                this.fg.patchValue({
                     name: this.user.name || '',
                     surname: this.user.surname || '',
                     email: this.user.email || '',
@@ -61,9 +60,19 @@ export class MyProfilePageComponent {
         );
     }
 
+    initializeForm() {
+        this.fg = this.fb.group({
+            name: [this.user?.name, Validators.required],
+            surname: [this.user?.surname, Validators.required],
+            email: [this.user?.email, [Validators.required, Validators.email]],
+            isRestaurantOwner: [this.user?.isRestaurantOwner || false],
+            birthdayDate: [this.user?.birthdayDate, Validators.required],
+            contactNumber: [this.user?.contactNumber, Validators.required]
+        });
+    }
+
     toggleIsToEdit(fieldName: string): void {
         this.isEdit[fieldName] = !this.isEdit[fieldName];
-        console.log(fieldName, this.isEdit[fieldName]);
     }
     saveUser(): void {
 
@@ -78,10 +87,8 @@ export class MyProfilePageComponent {
             restaurantId: this.user.restaurantId,
             password: this.user.password
         };
-        console.log(updatedUser);
-        this.userService.updateUser(updatedUser).subscribe(response => {
-            console.log(response);
-        })
+        this.userService.updateUser(updatedUser).subscribe()
+        this.getCurrentUser();
         for (const key in this.isEdit) {
             if (this.isEdit.hasOwnProperty(key)) {
                 this.isEdit[key] = false;
