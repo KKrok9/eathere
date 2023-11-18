@@ -1,17 +1,28 @@
-<div *ngIf="this.user!=null" class="page-wrapper">
-    <div class="page-content">
+<div *ngIf="user != null" class="page-wrapper">
+    <form [formGroup]="fg" (ngSubmit)="saveUser()" class="login-container">
         <div class="header">
             <h1>MY PROFILE</h1>
         </div>
-        <div *ngIf="user.name && user.surname && !isEdit['nameAndSurname'] else enterNameAndSurname"
-            class="my-profile-element">
-            <span class="bold">NAME AND SURNAME:</span>{{user.name}} {{ user.surname}}
-            <button (click)="toggleIsToEdit('nameAndSurname')">EDIT</button>
+
+        <div *ngIf="user.name && !isEdit['name'] else enterName" class="my-profile-element">
+            <span class="bold">NAME:</span>{{user.name}}
+            <button (click)="toggleIsToEdit('name')">EDIT</button>
         </div>
-        <ng-template #enterNameAndSurname>
+        <ng-template #enterName>
             <div>
-                <p>Enter name and surname</p>
-                <input>
+                <p>Enter name</p>
+                <input [(ngModel)]="user.name" formControlName="name">
+            </div>
+        </ng-template>
+
+        <div *ngIf="user.surname && !isEdit['surname'] else entersurname" class="my-profile-element">
+            <span class="bold">SURNAME:</span>{{ user.surname}}
+            <button (click)="toggleIsToEdit('surname')">EDIT</button>
+        </div>
+        <ng-template #entersurname>
+            <div>
+                <p>Enter surname</p>
+                <input [(ngModel)]="user.surname" formControlName="surname">
             </div>
         </ng-template>
 
@@ -22,45 +33,47 @@
         <ng-template #enterEmail>
             <div>
                 <p>Enter email</p>
-                <input>
+                <input [(ngModel)]="user.email" formControlName="email">
             </div>
         </ng-template>
 
-        <div *ngIf="user.isRestaurantOwner && !isEdit['roleInRestaurant'] else enterRoleInRestaurant"
+        <div *ngIf="user.isRestaurantOwner !== null && !isEdit['roleInRestaurant'] else enterRoleInRestaurant"
             class="my-profile-element">
             <span class="bold">ROLE IN RESTAURANT:</span>{{user.isRestaurantOwner}}
             <button (click)="toggleIsToEdit('roleInRestaurant')">EDIT</button>
         </div>
         <ng-template #enterRoleInRestaurant>
             <div>
-                <p>Enter your role in restaurant</p>
-                <input>
+                <p>Is restaurant owner</p>
+                <input [(ngModel)]="user.isRestaurantOwner" type="checkbox" formControlName="isRestaurantOwner">
             </div>
         </ng-template>
 
         <div *ngIf="user.birthdayDate && !isEdit['birthdayDate'] else enterBirthdayDate" class="my-profile-element">
-            <span class="bold">BirthdayDate:</span>{{user.birthdayDate}}
+            <span class="bold">Birthday Date:</span>{{user.birthdayDate}}
             <button (click)="toggleIsToEdit('birthdayDate')">EDIT</button>
         </div>
         <ng-template #enterBirthdayDate>
             <div>
                 <p>Enter birthdayDate</p>
-                <input type="date">
+                <input [(ngModel)]="user.birthdayDate" type="date" formControlName="birthdayDate">
             </div>
         </ng-template>
 
-        <div *ngIf="user.contactNumber && !isEdit['contectNumber'] else enterContactNumber" class="my-profile-element">
+        <div *ngIf="user.contactNumber !== null && !isEdit['contactNumber'] else enterContactNumber"
+            class="my-profile-element">
             <span class="bold">Contact number:</span>{{user.contactNumber}}
-            <button (click)="toggleIsToEdit('email')">EDIT</button>
+            <button (click)="toggleIsToEdit('contactNumber')">EDIT</button>
         </div>
         <ng-template #enterContactNumber>
             <div>
                 <p>Enter your contact number</p>
-                <input>
+                <input [(ngModel)]="user.contactNumber" formControlName="contactNumber">
             </div>
         </ng-template>
+
         <div class="save-button-div">
-            <button class="save-button" (click)="saveUser()">SAVE</button>
+            <button class="save-button" type="submit">SAVE</button>
         </div>
-    </div>
+    </form>
 </div>
