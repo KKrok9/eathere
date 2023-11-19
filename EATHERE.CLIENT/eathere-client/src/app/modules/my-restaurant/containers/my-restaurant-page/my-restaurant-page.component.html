@@ -1,1 +1,84 @@
-<p>my-restaurant-page works!</p>
+<div *ngIf="user!=null">
+    <h1>YOUR RESTAURANT</h1>
+    <div *ngIf="user.restaurantId==null && !isFormVisible">
+        <h1>YOU HAVENT REGISTERED YOUR RESTAURANT YET!</h1>
+        <button (click)="setFormVisible()">CLICK ME TO REGISTER</button>
+    </div>
+
+    <form *ngIf="user.restaurantId==null && isFormVisible" [formGroup]="fg" (ngSubmit)="this.addRestaurant()">
+        <div class="country-div">
+            <p>Enter country:</p>
+            <input formControlName="country">
+
+        </div>
+        <div class="city-div">
+            <p>Enter city:</p>
+            <input formControlName="city">
+        </div>
+        <div class="street-div">
+            <p>Enter street:</p>
+            <input formControlName="street">
+        </div>
+        <div class="street-number-div">
+            <p>Enter street number:</p>
+            <input formControlName="streetNumber">
+        </div>
+        <div class="restaurant-name-div">
+            <p>Enter restaurant name:</p>
+            <input formControlName="restaurantName">
+        </div>
+
+        <button type="submit">ADD RESTAURANT</button>
+    </form>
+
+    <!--HAVE TO ADD POSSIBILITY TO JUST ENTER THE CODE-->
+    <!--DO IT IF RESTAURANTID == NULL AND IS NOT OWNER OF RESTAURANT-->
+    <form [formGroup]="fg" *ngIf="restaurant!=null" class="restaurant-info-container">
+        <div *ngIf="restaurant.restaurantName!=null && !isEdit['restaurantName'] else editRestaurantName"
+            class="restaurant-name-info-div">
+            <p>Restaurant name:{{restaurant.restaurantName}} </p>
+            <button (click)="toggleIsToEdit('restaurantName')">EDIT</button>
+        </div>
+        <ng-template #editRestaurantName>
+            <p>Enter restaurant name</p>
+            <input formControlName="restaurantName">
+        </ng-template>
+
+        <div *ngIf="restaurant.country!=null && !isEdit['country'] else editCountry" class="country-div">
+            <p>Country:{{restaurant.country}} </p>
+            <button (click)="toggleIsToEdit('country')">EDIT</button>
+        </div>
+        <ng-template #editCountry>
+            <p>Enter country</p>
+            <input formControlName="country">
+        </ng-template>
+
+
+        <div *ngIf="restaurant.street!=null && !isEdit['street'] else editStreet" class="street-div">
+            <p>Street:{{restaurant.street}} </p>
+            <button (click)="toggleIsToEdit('street')">EDIT</button>
+        </div>
+        <ng-template #editStreet>
+            <p>Enter street</p>
+            <input formControlName="street">
+        </ng-template>
+
+
+        <div *ngIf="restaurant.streetNumber!=null && !isEdit['streetNumber'] else editStreetNumber"
+            class="street-number-div">
+            <p>StreetNumber:{{restaurant.streetNumber}} </p>
+            <button (click)="toggleIsToEdit('streetNumber')">EDIT</button>
+        </div>
+        <ng-template #editStreetNumber>
+            <p>Enter street number</p>
+            <input formControlName="street">
+        </ng-template>
+
+        <div class="restaurant-code-info-div">
+            <p>Restaurant code: {{restaurant.restaurantCode}}</p>
+        </div>
+
+    </form>
+
+
+</div>

@@ -21,7 +21,6 @@ export class AppComponent {
     private checkIfTokenExists(): void {
         var token = localStorage.getItem('jwt');
         var isLoggedIn = (token !== null);
-        console.log(isLoggedIn);
         if (isLoggedIn) {
             this.router.navigateByUrl('/home');
         }

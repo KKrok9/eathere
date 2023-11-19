@@ -14,7 +14,7 @@ namespace Eathere.Models
         public string Street { get; set; }
         public string StreetNumber { get; set; }
         public string RestaurantName { get; set; }
-        public Guid OwnerId { get; set; } // it doesn't have to be unique cause some owners can own multiple restaurants
+        public Guid OwnerId { get; set; } //CHANGE IT TO UNIQUE
         [MaxLength(5)]
         public string RestaurantCode { get; set; }
 

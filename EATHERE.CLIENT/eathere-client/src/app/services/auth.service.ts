@@ -24,5 +24,9 @@ export class AuthService extends HttpRequestsService {
         this.isLoggedIn = value;
     }
 
+    getMyId(): Observable<any> {
+        return this.get<any>('Auth/GetMyId');
+    }
+
 
 }
