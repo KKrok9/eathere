@@ -18,7 +18,6 @@ export class MyProfilePageComponent {
         name: false,
         surname: false,
         email: false,
-        roleInRestaurant: false,
         birthdayDate: false,
         contactNumber: false,
     };

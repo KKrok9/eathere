@@ -1,0 +1,60 @@
+.page-wrapper {
+    width: 100%;
+    height: 100%;
+    border: solid 1px blue;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    .restaurant-container {
+        width: 30%;
+        height: 70%;
+        border: solid 1px black;
+        border-radius: 12px;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        flex-direction: column;
+
+        .my-restaurant-element {
+            width: 90%;
+            border-bottom: solid 1px;
+            border-radius: 12px;
+            display: flex;
+            justify-content: space-between;
+            padding: 5%;
+
+            button {
+                height: 40%;
+            }
+        }
+
+        .my-restaurant-element-edit {
+            width: 70%;
+            border-bottom: solid 1px;
+            border-radius: 12px;
+            display: flex;
+            justify-content: space-between;
+            padding: 5%;
+
+            input {
+                height: 50%;
+            }
+        }
+
+        .save-button-div {
+            width: 100%;
+            height: 10%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            button {
+                width: 50%;
+                height: 80%;
+                border-radius: 12px;
+            }
+        }
+    }
+}
