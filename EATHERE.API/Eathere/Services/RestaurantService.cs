@@ -23,7 +23,7 @@ namespace Eathere.Services
             string restaurantCode = await CreateRestaurantCode();
             restaurant.RestaurantCode = restaurantCode; 
             await _repository.AddAsync(restaurant);
-            var restaurants = await _repository.GetAllAsync();
+            var restaurants = await _repository.GetAllAsync(); // CAN CHANGE IT WITH FUNCTION 
             var currentlyLoggedUser = await _userService.GetCurrentlyLoggedUser();
             var thisRestaurant = restaurants.FirstOrDefault(x => x.OwnerId == currentlyLoggedUser.Id);
             currentlyLoggedUser.RestaurantId = thisRestaurant.Id;
@@ -64,6 +64,14 @@ namespace Eathere.Services
         public async Task UpdateRestaurant(Restaurant restaurant)
         {
             await _repository.UpdateAsync(restaurant);
+        }
+
+        public async Task<Restaurant> GetRestaurantOfCurrentlyLoggedUser()
+        {
+            var currentlyLoggedUser = await _userService.GetCurrentlyLoggedUser();
+            var restaurants = await _repository.GetAllAsync();
+            var thisRestaurant = restaurants.FirstOrDefault(x => x.OwnerId == currentlyLoggedUser.Id);
+            return thisRestaurant;
         }
     }
 }

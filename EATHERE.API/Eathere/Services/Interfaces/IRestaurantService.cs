@@ -14,5 +14,8 @@ namespace Eathere.Services.Interfaces
         Task<Restaurant> GetRestaurantByOwnerId(Guid id); // IF NULL, USER HASNT REGISTERED ANY RESTAURANT SO SHOW JUST INPUTS
         //GET ALL RESTAURANTS
         Task<IEnumerable<Restaurant>> GetAllRestaurants();
+
+        //GET RESTAURANT OF CURRENTLY LOGGED USER
+        Task <Restaurant> GetRestaurantOfCurrentlyLoggedUser();
     }
 }

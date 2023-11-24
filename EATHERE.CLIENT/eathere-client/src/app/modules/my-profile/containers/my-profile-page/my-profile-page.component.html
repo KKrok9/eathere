@@ -36,8 +36,9 @@
         </ng-template>
 
         <div *ngIf="user.isRestaurantOwner !== null" class="my-profile-element">
-            <span class="bold">ROLE IN RESTAURANT: {{ user.isRestaurantOwner }}</span>
+            <span class="bold">ROLE IN RESTAURANT: {{ user.isRestaurantOwner ? 'Restaurant owner' : 'Worker' }}</span>
         </div>
+
 
 
         <div *ngIf="user.birthdayDate && !isEdit['birthdayDate'] else enterBirthdayDate" class="my-profile-element">
