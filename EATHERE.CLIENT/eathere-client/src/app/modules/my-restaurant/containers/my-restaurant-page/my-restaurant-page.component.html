@@ -33,7 +33,7 @@
 
     <!--HAVE TO ADD POSSIBILITY TO JUST ENTER THE CODE-->
     <!--DO IT IF RESTAURANTID == NULL AND IS NOT OWNER OF RESTAURANT-->
-    <form [formGroup]="fg" *ngIf="restaurant!=null" class="restaurant-container">
+    <form [formGroup]="fg" *ngIf="restaurant!=null" class="restaurant-container" (ngSubmit)="updateRestaurant()">
         <div *ngIf="restaurant.restaurantName!=null && !isEdit['restaurantName'] else editRestaurantName"
             class="my-restaurant-element">
             <p>Restaurant name:{{restaurant.restaurantName}} </p>
@@ -78,7 +78,7 @@
         <ng-template #editStreetNumber>
             <div class="my-restaurant-element-edit">
                 <p>Enter street number</p>
-                <input formControlName="street">
+                <input formControlName="streetNumber">
             </div>
         </ng-template>
 
@@ -89,6 +89,4 @@
             <button class="save-button" type="submit">SAVE</button>
         </div>
     </form>
-
-
 </div>

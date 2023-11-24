@@ -17,4 +17,8 @@ export class RestaurantService extends HttpRequestsService {
         return this.get<any>(`Restaurant/GetRestaurantByOwnerId/${id}`)
     }
 
+    updateRestaurant(restaurant: any): Observable<any> {
+        return this.put<any>("Restaurant/UpdateRestaurant", restaurant);
+    }
+
 }

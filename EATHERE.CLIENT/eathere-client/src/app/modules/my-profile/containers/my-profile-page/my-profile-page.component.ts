@@ -73,8 +73,7 @@ export class MyProfilePageComponent {
     toggleIsToEdit(fieldName: string): void {
         this.isEdit[fieldName] = !this.isEdit[fieldName];
     }
-    saveUser(): void {
-
+    updateUser(): void {
         const updatedUser = {
             id: this.user.id,
             name: this.fg.value.name,

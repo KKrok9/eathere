@@ -1,6 +1,6 @@
 <div *ngIf="user != null" class="page-wrapper">
     <h2>YOUR PROFILE</h2>
-    <form [formGroup]="fg" (ngSubmit)="saveUser()" class="profile-container">
+    <form [formGroup]="fg" (ngSubmit)="updateUser()" class="profile-container">
 
         <div *ngIf="user.name && !isEdit['name'] else enterName" class="my-profile-element">
             <span class="bold">NAME: {{ user.name }}</span>

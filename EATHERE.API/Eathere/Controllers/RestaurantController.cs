@@ -22,7 +22,7 @@ namespace Eathere.Controllers
         }
 
         [HttpPut("UpdateRestaurant")]
-        public async Task <ActionResult> UpdateRestaurant(Restaurant restaurant)
+        public async Task <IActionResult> UpdateRestaurant(Restaurant restaurant)
         {
             await _restaurantService.UpdateRestaurant(restaurant);
             return Ok(new { message = "Restaurant updated!" });

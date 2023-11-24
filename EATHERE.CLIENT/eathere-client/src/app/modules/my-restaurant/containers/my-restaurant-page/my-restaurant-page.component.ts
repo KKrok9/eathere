@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { Restaurant } from 'src/app/models/restaurant.model';
 import { User } from 'src/app/models/user.model';
@@ -40,6 +40,7 @@ export class MyRestaurantPageComponent implements OnInit {
     ngOnInit(): void {
         this.getCurrentUser();
         this.getRestaurant();
+        this.initializeForm();
     }
 
     private getFg(): any {
@@ -88,15 +89,52 @@ export class MyRestaurantPageComponent implements OnInit {
             this.subscription.add(
                 this.restaurantService.getRestaurantByOwnerId(this.user.id).subscribe(response => {
                     this.restaurant = response
-                    console.log(response)
+                    this.fg.patchValue({
+                        country: this.restaurant.country || '',
+                        city: this.restaurant.city || '',
+                        street: this.restaurant.street || '',
+                        streetNumber: this.restaurant.streetNumber || '',
+                        restaurantName: this.restaurant.restaurantName || '',
+                    });
                 })
             )
         }
     }
 
+    initializeForm() {
+        this.fg = this.fb.group({
+            country: [this.restaurant?.country, Validators.required],
+            city: [this.restaurant?.city, Validators.required],
+            street: [this.restaurant?.street, Validators.required],
+            streetNumber: [this.restaurant?.streetNumber, Validators.required],
+            restaurantName: [this.restaurant?.restaurantName, Validators.required]
+        })
+    }
+
+
     toggleIsToEdit(fieldName: string): void {
         this.isEdit[fieldName] = !this.isEdit[fieldName];
     }
 
+    updateRestaurant(): void {
+        const updatedRestaurant = {
+            id: this.restaurant.id,
+            country: this.fg.value.country,
+            city: this.fg.value.city,
+            street: this.fg.value.street,
+            streetNumber: this.fg.value.streetNumber,
+            restaurantName: this.fg.value.restaurantName,
+            ownerId: this.restaurant.ownerId,
+            restaurantCode: this.restaurant.restaurantCode
+        }
+        this.restaurantService.updateRestaurant(updatedRestaurant).subscribe();
+        for (const key in this.isEdit) {
+            if (this.isEdit.hasOwnProperty(key)) {
+                this.isEdit[key] = false;
+            }
+        }
+        this.getCurrentUser();
+        this.getRestaurant();
+    }
 
 }
