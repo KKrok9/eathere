@@ -8,10 +8,12 @@ import { HttpClientModule } from '@angular/common/http';
 import { HomeModule } from './modules/home/home.module';
 import { MyRestaurantModule } from './modules/my-restaurant/my-restaurant.module';
 import { DishesListModule } from './modules/dishes-list/dishes-list.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
     declarations: [
-        AppComponent
+        AppComponent,
     ],
     imports: [
         BrowserModule,
@@ -21,7 +23,9 @@ import { DishesListModule } from './modules/dishes-list/dishes-list.module';
         HttpClientModule,
         HomeModule,
         MyRestaurantModule,
-        DishesListModule
+        DishesListModule,
+        BrowserAnimationsModule,
+        SharedModule
     ],
     providers: [],
     bootstrap: [AppComponent]

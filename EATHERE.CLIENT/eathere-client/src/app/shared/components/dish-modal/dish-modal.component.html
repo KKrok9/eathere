@@ -1,0 +1,37 @@
+<div class="modal-wrapper">
+    <form [formGroup]="fg" class="form" (ngSubmit)="updateDish()">
+        <div class="form-row">
+            <p>Name:</p>
+            <input formControlName="name">
+        </div>
+        <div class="form-row">
+            <p>Ingredients:</p>
+            <input formControlName="ingredients">
+        </div>
+        <div class="form-row">
+            <p>Description:</p>
+            <input formControlName="description">
+        </div>
+        <div class="form-row">
+            <p>Price:</p>
+            <input formControlName="price">
+        </div>
+        <div class="form-row">
+            <p>Calories:</p>
+            <input formControlName="calories">
+        </div>
+        <div class="form-row">
+            <p>Proteins:</p>
+            <input formControlName="proteins">
+        </div>
+        <div class="form-row">
+            <p>Fats:</p>
+            <input formControlName="fats">
+        </div>
+        <div class="form-row">
+            <p>Carbohydrates:</p>
+            <input formControlName="carbohydrates">
+        </div>
+        <button type="submit">SAVE DISH</button>
+    </form>
+</div>

@@ -16,6 +16,9 @@ export class DishesListPageComponent implements OnInit {
     restaurant!: Restaurant;
     dishes: Dish[] = [];
     fg: FormGroup;
+    isDishModalVisible = false;
+    selectedDishId: string | null = null;
+
     private subscription = new Subscription();
 
     constructor(
@@ -111,5 +114,10 @@ export class DishesListPageComponent implements OnInit {
             fats: "",
             carbohydrates: ""
         });
+    }
+
+    openModal(dishId: string): void {
+        this.selectedDishId = dishId;
+        this.isDishModalVisible = true;
     }
 }

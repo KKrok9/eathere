@@ -27,6 +27,11 @@ namespace Eathere.Services
             
         }
 
+        public async Task UpdateDish(Dish dish)
+        {
+            await _repository.UpdateAsync(dish);
+        }
+
         public async Task DeleteDish(Guid id)
         {
             await _repository.DeleteAsync(id);
@@ -43,11 +48,6 @@ namespace Eathere.Services
         {
             var dishToReturn = await _repository.GetByIdAsync(id);
             return dishToReturn;
-        }
-
-        public async Task UpdateDish(Dish dish)
-        {
-            await _repository.UpdateAsync(dish);
         }
     }
 }

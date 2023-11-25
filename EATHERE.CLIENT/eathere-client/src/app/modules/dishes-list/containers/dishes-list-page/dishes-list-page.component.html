@@ -20,7 +20,7 @@
         </div>
         <div class="second-row">
             <div class="add-dish-btn-div">
-                <button type="submit">Add Dish </button>
+                <button type="submit">Add Dish</button>
             </div>
         </div>
     </form>
@@ -46,7 +46,7 @@
             </div>
         </div>
         <div *ngFor="let dish of dishes" class="dish-row">
-            <div class="dish-column">
+            <div class="dish-column" (click)="openModal(dish.id)">
                 <p>{{ dish.name }}</p>
             </div>
             <div class="dish-column">
@@ -64,6 +64,9 @@
             <div class="dish-column">
                 <button (click)="deleteDish(dish.id)">DELETE</button>
             </div>
+            <ng-container *ngIf="isDishModalVisible==true && dish.id==selectedDishId">
+                <app-dish-modal [dish]="dish" [restaurantId]="restaurant.id"></app-dish-modal>
+            </ng-container>
         </div>
     </div>
 </div>
