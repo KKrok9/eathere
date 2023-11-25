@@ -4,6 +4,7 @@ using Eathere.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Eathere.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20231125162333_DishTableEdit")]
+    partial class DishTableEdit
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -56,6 +59,7 @@ namespace Eathere.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid?>("PortionTypeId")
+                        .IsRequired()
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<double>("Price")
@@ -263,7 +267,9 @@ namespace Eathere.Migrations
 
                     b.HasOne("Eathere.Models.PortionType", "PortionType")
                         .WithMany()
-                        .HasForeignKey("PortionTypeId");
+                        .HasForeignKey("PortionTypeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Eathere.Models.Restaurant", "Restaurant")
                         .WithMany()

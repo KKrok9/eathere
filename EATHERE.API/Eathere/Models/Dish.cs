@@ -20,16 +20,16 @@ namespace Eathere.Models
 
         public Guid? PortionTypeId { get; set; }
         [ForeignKey("PortionTypeId")]
-        public virtual PortionType PortionType { get; set; }
+        public virtual PortionType? PortionType { get; set; }
 
         public Guid? DishTypeId { get; set; }
         [ForeignKey("DishTypeId")]
-        public virtual DishType DishType { get; set; }
+        public virtual DishType? DishType { get; set; }
 
         public Guid RestaurantId { get; set; }
         [ForeignKey("RestaurantId")]
-        public virtual Restaurant Restaurant { get; set; }
+        public virtual Restaurant? Restaurant { get; set; }
 
-        public virtual List<OrderDish> OrderDishes { get; set; }
+        public virtual List<OrderDish>? OrderDishes { get; set; }
     }
 }

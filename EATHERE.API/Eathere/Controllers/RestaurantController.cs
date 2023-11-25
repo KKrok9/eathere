@@ -45,6 +45,15 @@ namespace Eathere.Controllers
             return restaurant;
         }
 
-
+        [HttpGet("GetRestaurantOfCurrentlyLoggedUser")]
+        public async Task<ActionResult<Restaurant>> GetRestaurantOfCurrentlyLoggedUser()
+        {
+            var restaurant = await _restaurantService.GetRestaurantOfCurrentlyLoggedUser();
+            if (restaurant == null)
+            {
+                return NotFound();
+            }
+            return restaurant;
+        }
     }
 }

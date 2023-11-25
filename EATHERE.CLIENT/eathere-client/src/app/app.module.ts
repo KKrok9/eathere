@@ -7,6 +7,7 @@ import { AuthModule } from './modules/auth/auth.module';
 import { HttpClientModule } from '@angular/common/http';
 import { HomeModule } from './modules/home/home.module';
 import { MyRestaurantModule } from './modules/my-restaurant/my-restaurant.module';
+import { DishesListModule } from './modules/dishes-list/dishes-list.module';
 
 @NgModule({
     declarations: [
@@ -19,7 +20,8 @@ import { MyRestaurantModule } from './modules/my-restaurant/my-restaurant.module
         AuthModule,
         HttpClientModule,
         HomeModule,
-        MyRestaurantModule
+        MyRestaurantModule,
+        DishesListModule
     ],
     providers: [],
     bootstrap: [AppComponent]

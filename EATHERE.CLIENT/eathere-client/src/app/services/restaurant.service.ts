@@ -21,4 +21,9 @@ export class RestaurantService extends HttpRequestsService {
         return this.put<any>("Restaurant/UpdateRestaurant", restaurant);
     }
 
+    getRestaurantOfCurrentlyLoggedUser(): Observable<any> {
+        return this.get<any>("Restaurant/GetRestaurantOfCurrentlyLoggedUser");
+    }
+
+
 }

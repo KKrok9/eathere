@@ -1,30 +1,69 @@
 <div class="page-container">
-    <div class="form-container">
+    <form [formGroup]="fg" *ngIf="restaurant!==null" class="form-container" (ngSubmit)="addDish()">
         <div class="first-row">
             <div class="first-column">
-                <input placeholder="Name">
-                <input placeholder="Price">
+                <input placeholder="Name" formControlName="name">
+                <input placeholder="Price" formControlName="price">
             </div>
             <div class="second-column">
-                <input placeholder="Ingredients">
+                <input placeholder="Ingredients" formControlName="ingredients">
             </div>
             <div class="third-column">
-                <input placeholder="Description">
+                <input placeholder="Description" formControlName="description">
             </div>
             <div class="fourth-column">
-                <input placeholder="Calories">
-                <input placeholder="Proteins">
-                <input placeholder="Fats">
-                <input placeholder="Carbs">
+                <input placeholder="Calories" formControlName="calories">
+                <input placeholder="Proteins" formControlName="proteins">
+                <input placeholder="Fats" formControlName="fats">
+                <input placeholder="Carbs" formControlName="carbohydrates">
             </div>
         </div>
         <div class="second-row">
             <div class="add-dish-btn-div">
-                <button>Add Dish </button>
+                <button type="submit">Add Dish </button>
             </div>
         </div>
-    </div>
+    </form>
     <div class="table-container">
-
+        <div class="description-row">
+            <div class="dish-column">
+                <p>Dish</p>
+            </div>
+            <div class="dish-column">
+                <p>Price</p>
+            </div>
+            <div class="dish-column">
+                <p>Ingredients</p>
+            </div>
+            <div class="dish-column">
+                <p>Description</p>
+            </div>
+            <div class="dish-column">
+                <p>Calories</p>
+            </div>
+            <div class="dish-column">
+                <p>EMPTY</p>
+            </div>
+        </div>
+        <div *ngFor="let dish of dishes" class="dish-row">
+            <div class="dish-column">
+                <p>{{ dish.name }}</p>
+            </div>
+            <div class="dish-column">
+                <p>{{ dish.price }} PLN</p>
+            </div>
+            <div class="dish-column">
+                <p>{{ dish.ingredients }}</p>
+            </div>
+            <div class="dish-column">
+                <p>{{ dish.description }}</p>
+            </div>
+            <div class="dish-column">
+                <p>{{ dish.calories }}</p>
+            </div>
+            <div class="dish-column">
+                <button (click)="deleteDish(dish.id)">DELETE</button>
+            </div>
+        </div>
     </div>
 </div>

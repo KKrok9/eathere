@@ -84,8 +84,6 @@
             }
 
         }
-
-
     }
 
     .table-container {
@@ -93,5 +91,48 @@
         border: solid 1px;
         border-radius: 12px;
         height: 70%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        .description-row {
+            border: solid 1px;
+            border-radius: 12px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 10%;
+            width: 95%;
+            flex-direction: row;
+
+            .dish-column {
+                width: 20%;
+                border: solid 1px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+        }
+
+        .dish-row {
+            border: solid 1px;
+            border-radius: 12px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 10%;
+            width: 95%;
+            flex-direction: row;
+
+            .dish-column {
+                width: 20%;
+                border: solid 1px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+        }
     }
 }
