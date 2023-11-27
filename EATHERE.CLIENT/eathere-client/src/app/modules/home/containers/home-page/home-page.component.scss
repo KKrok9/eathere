@@ -1,0 +1,50 @@
+.page-container {
+    width: 100%;
+    height: 100%;
+    border: solid 1px green;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+
+    .header {
+        width: 100%;
+        height: 10%;
+        border: solid 1px black;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+
+        .date-div,
+        .hour-div,
+        .logged-user-div {
+            width: 20%;
+            border: solid 1px;
+            border-radius: 12px;
+            height: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+    }
+
+    .main-content {
+        height: 90%;
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .tables-div,
+    .active-orders-div,
+    .third-div,
+    .fourth-div {
+        border: solid 1px;
+        width: 50%;
+        height: 50%;
+        box-sizing: border-box;
+    }
+
+}

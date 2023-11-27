@@ -11,5 +11,8 @@ namespace Eathere.Models
         public int TableNumber { get; set; }
         public int Capacity { get; set; }
         public bool IsTaken { get; set; }
+        public Guid RestaurantId { get; set; }
+        [ForeignKey("RestaurantId")]
+        public virtual Restaurant? Restaurant { get; set; }
     }
 }
