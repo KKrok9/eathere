@@ -19,6 +19,7 @@ builder.Services.AddTransient<IAuthService, AuthService>();
 builder.Services.AddTransient<IUserService, UserService>();
 builder.Services.AddTransient<IRestaurantService, RestaurantService>();
 builder.Services.AddTransient<IDishService,DishService>();
+builder.Services.AddTransient<ITableService, TableService>();
 builder.Services.AddCors(options => // pozwala na dostep do zasobow z innych domen
 //cors to cross origin resources sharing
 {

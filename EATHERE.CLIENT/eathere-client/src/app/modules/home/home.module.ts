@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HomePageComponent } from './containers/home-page/home-page.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 const COMPONENTS = [HomePageComponent]
 
@@ -9,7 +11,10 @@ const COMPONENTS = [HomePageComponent]
         HomePageComponent
     ],
     imports: [
-        CommonModule
+        CommonModule,
+        FormsModule,
+        ReactiveFormsModule,
+        SharedModule
     ],
     exports: [COMPONENTS]
 })
