@@ -1,1 +1,41 @@
-<p>tables-form works!</p>
+<div class="form-wrapper">
+    <div class="description-row">
+        <div class="table-col">
+            <p>Table name</p>
+        </div>
+        <div class="table-col">
+            <p>Capacity</p>
+        </div>
+        <div class="table-col">
+            <p>Status</p>
+        </div>
+        <div class="table-col">
+        </div>
+        <div class="table-col">
+        </div>
+    </div>
+    <div class="tables-container">
+        <div *ngFor="let table of tables" class="table-row">
+            <div class="table-col">
+                <p>{{table.tableName}}</p>
+            </div>
+            <div class="table-col">
+                <p>{{table.capacity}}</p>
+            </div>
+            <div class="table-col">
+                <p>{{table.isTaken ? 'TAKEN' : 'FREE'}}</p>
+            </div>
+            <div class="table-col">
+                <button (click)="toggleStatus(table)">{{table.isTaken ? 'UNBOOK' : 'BOOK'}}</button>
+            </div>
+            <div class="table-col">
+                <button (click)="deleteTable(table.id)">DELETE</button>
+            </div>
+        </div>
+    </div>
+    <form [formGroup]="fg" class="buttons-container" (ngSubmit)="addDish()">
+        <input placeholder="name" formControlName="name">
+        <input placeholder="capacity" formControlName="capacity">
+        <button type="submit">ADD</button>
+    </form>
+</div>

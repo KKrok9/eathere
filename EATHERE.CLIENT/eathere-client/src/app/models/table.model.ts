@@ -1,6 +1,6 @@
 export interface Table {
     id: string;
-    tableNumber: number;
+    tableName: string;
     capacity: number;
     isTaken: boolean;
     restaurantId: string;

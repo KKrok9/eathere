@@ -15,6 +15,10 @@
 
   <ItemGroup>
     <Compile Remove="Controllers\ValuesController.cs" />
+    <Compile Remove="Migrations\20231105134641_SomeTablesEdit.cs" />
+    <Compile Remove="Migrations\20231105134641_SomeTablesEdit.Designer.cs" />
+    <Compile Remove="Migrations\20231127205852_EditedTables.cs" />
+    <Compile Remove="Migrations\20231127205852_EditedTables.Designer.cs" />
     <Compile Remove="Services\Interfaces\Interface.cs" />
   </ItemGroup>
 

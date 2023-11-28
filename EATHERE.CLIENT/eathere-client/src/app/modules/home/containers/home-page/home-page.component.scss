@@ -24,6 +24,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
+
         }
 
     }
@@ -35,16 +36,16 @@
         flex-wrap: wrap;
         justify-content: center;
         align-items: center;
-    }
 
-    .tables-div,
-    .active-orders-div,
-    .third-div,
-    .fourth-div {
-        border: solid 1px;
-        width: 50%;
-        height: 50%;
-        box-sizing: border-box;
+        .tables-div,
+        .active-orders-div,
+        .third-div,
+        .fourth-div {
+            border: solid 1px;
+            width: 50%;
+            height: 50%;
+            box-sizing: border-box;
+        }
     }
 
 }

@@ -90,6 +90,7 @@ export class DishesListPageComponent implements OnInit {
                 this.dishService.addDish(newDish).subscribe(
                     () => {
                         this.loadDishes();
+                        this.fg.reset();
                     },
                     (error) => {
                         console.error(error);
