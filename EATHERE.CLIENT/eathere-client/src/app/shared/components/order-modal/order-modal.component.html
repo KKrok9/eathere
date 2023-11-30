@@ -1,19 +1,23 @@
-<div class="modal-wrapper">
+<div class="modal-wrapper" *ngIf="restaurantId">
     <form class="form">
-        <button (click)="toggleIsModalVisible()">X</button>
+        <button>X</button>
         <button>Add dish</button>
         <div class="form-row">
             <p>Dish:</p>
-            <select></select>
+            <select>
+                <option *ngFor="let dish of dishes" [value]="dish.id">{{ dish.name }}</option>
+            </select>
         </div>
         <div class="form-row">
             <p>Table:</p>
-            <select></select>
+            <select>
+                <option *ngFor="let table of tables" [value]="table.id">{{ table.tableName }}</option>
+            </select>
         </div>
         <div>
             <p>Description:</p>
             <input>
         </div>
-        <button type="submit">SAVE DISH</button>
+        <button type=" submit">SAVE DISH</button>
     </form>
 </div>
