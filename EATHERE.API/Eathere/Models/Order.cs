@@ -10,10 +10,9 @@ namespace Eathere.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid Id { get; set; }
-
         public Guid OrderAccepterId { get; set; }
         public Guid TableId { get; set; }
         public string OrderStatus { get; set; }
-        public virtual List<OrderDish> OrderDishes { get; set; } // Dodaj tę właściwość
+        public virtual List<Dish> Dishes { get; set; } = new List<Dish>();
     }
 }

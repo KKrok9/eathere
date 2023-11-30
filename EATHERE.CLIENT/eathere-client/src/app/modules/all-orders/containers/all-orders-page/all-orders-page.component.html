@@ -1,1 +1,9 @@
-<p>all-orders-page works!</p>
+<div class="page-container">
+    <div class="button-container">
+        <button (click)="toggleIsVisible()">ADD NEW ORDER</button>
+    </div>
+    <div class="table-container"></div>
+    <ng-container *ngIf="isModalVisible">
+        <app-order-modal [toggleIsModalVisible]="toggleIsVisible()"></app-order-modal>
+    </ng-container>
+</div>

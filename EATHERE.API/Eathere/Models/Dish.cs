@@ -30,6 +30,7 @@ namespace Eathere.Models
         [ForeignKey("RestaurantId")]
         public virtual Restaurant? Restaurant { get; set; }
 
-        public virtual List<OrderDish>? OrderDishes { get; set; }
+        public Guid? OrderId {get; set;}
+
     }
 }

@@ -21,19 +21,6 @@ namespace Eathere.Data
             modelBuilder.Entity<Restaurant>()
                 .HasIndex(r => r.RestaurantCode)
                 .IsUnique();
-
-            modelBuilder.Entity<OrderDish>()
-        .HasKey(od => new { od.OrderId, od.DishId });
-
-            modelBuilder.Entity<OrderDish>()
-                .HasOne(od => od.Order)
-                .WithMany(o => o.OrderDishes)
-                .HasForeignKey(od => od.OrderId);
-
-            modelBuilder.Entity<OrderDish>()
-                .HasOne(od => od.Dish)
-                .WithMany(d => d.OrderDishes)
-                .HasForeignKey(od => od.DishId);
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

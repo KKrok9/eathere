@@ -4,8 +4,6 @@ import { DishesListPageComponent } from './containers/dishes-list-page/dishes-li
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from 'src/app/shared/shared.module';
 
-
-
 @NgModule({
     declarations: [
         DishesListPageComponent
