@@ -81,7 +81,7 @@ export class TablesFormComponent implements OnInit {
         if (this.restaurant) {
             const updatedTable = {
                 id: table.id,
-                tableName: table.tableName,
+                tableName: table.name,
                 capacity: table.capacity,
                 isTaken: !table.isTaken,
                 restaurantId: this.restaurant.id

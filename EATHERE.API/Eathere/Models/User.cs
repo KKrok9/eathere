@@ -18,7 +18,8 @@ namespace Eathere.Models
         public string? ContactNumber { get; set; }
         public DateTime? BirthdayDate { get; set; }
         public bool IsRestaurantOwner { get; set; }
-        [ForeignKey("Restaurant")]
         public Guid? RestaurantId { get; set; }
+        [ForeignKey("RestaurantId")]
+        public virtual Restaurant? Restaurant { get; set; }
     }
 }

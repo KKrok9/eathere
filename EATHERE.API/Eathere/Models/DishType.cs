@@ -11,6 +11,9 @@ namespace Eathere.Models
         public string TypeName { get; set; } //main,soup,dessert,drink,snack,addition
         public bool IsVegan { get; set; }
         public bool HasAlcohol { get; set; }
-        
+        public Guid RestaurantId { get; set; }
+        [ForeignKey("RestaurantId")]
+        public virtual Restaurant? Restaurant { get; set; }
+
     }
 }

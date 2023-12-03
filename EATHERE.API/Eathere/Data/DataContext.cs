@@ -21,6 +21,12 @@ namespace Eathere.Data
             modelBuilder.Entity<Restaurant>()
                 .HasIndex(r => r.RestaurantCode)
                 .IsUnique();
+            modelBuilder.Entity<Table>()
+               .HasOne(t => t.Restaurant)
+               .WithMany()  // Assuming there is no navigation property on Restaurant pointing back to Table
+               .HasForeignKey(t => t.RestaurantId)
+               .OnDelete(DeleteBehavior.Restrict);
+
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

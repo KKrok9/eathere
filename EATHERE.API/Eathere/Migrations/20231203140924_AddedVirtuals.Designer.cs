@@ -4,6 +4,7 @@ using Eathere.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Eathere.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20231203140924_AddedVirtuals")]
+    partial class AddedVirtuals
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -213,12 +216,12 @@ namespace Eathere.Migrations
                     b.Property<bool>("IsTaken")
                         .HasColumnType("bit");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<Guid>("RestaurantId")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("TableName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -258,7 +261,7 @@ namespace Eathere.Migrations
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid?>("RestaurantId")
+                    b.Property<Guid>("RestaurantId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Surname")
@@ -351,7 +354,9 @@ namespace Eathere.Migrations
                 {
                     b.HasOne("Eathere.Models.Restaurant", "Restaurant")
                         .WithMany()
-                        .HasForeignKey("RestaurantId");
+                        .HasForeignKey("RestaurantId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Restaurant");
                 });

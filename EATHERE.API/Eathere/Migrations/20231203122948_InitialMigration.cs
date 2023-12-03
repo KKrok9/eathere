@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Eathere.Migrations
 {
     /// <inheritdoc />
-    public partial class AddedNewTables : Migration
+    public partial class InitialMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -23,20 +23,6 @@ namespace Eathere.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_DishTypes", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Orders",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    OrderAccepterId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    TableId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    OrderStatus = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Orders", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -62,25 +48,11 @@ namespace Eathere.Migrations
                     StreetNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     RestaurantName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     OwnerId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    RestaurantCode = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                    RestaurantCode = table.Column<string>(type: "nvarchar(5)", maxLength: 5, nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Restaurants", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Tables",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    TableNumber = table.Column<int>(type: "int", nullable: false),
-                    Capacity = table.Column<int>(type: "int", nullable: false),
-                    IsTaken = table.Column<bool>(type: "bit", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Tables", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -92,11 +64,11 @@ namespace Eathere.Migrations
                     Surname = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    RestaurantId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    RoleInRestaurant = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    BirthdayDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     RegisterDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    Salary = table.Column<double>(type: "float", nullable: true)
+                    ContactNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    BirthdayDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    IsRestaurantOwner = table.Column<bool>(type: "bit", nullable: false),
+                    RestaurantId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -116,8 +88,8 @@ namespace Eathere.Migrations
                     Proteins = table.Column<double>(type: "float", nullable: true),
                     Fats = table.Column<double>(type: "float", nullable: true),
                     Carbohydrates = table.Column<double>(type: "float", nullable: true),
-                    PortionTypeId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    DishTypeId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    PortionTypeId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    DishTypeId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     RestaurantId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
@@ -127,14 +99,12 @@ namespace Eathere.Migrations
                         name: "FK_Dishes_DishTypes_DishTypeId",
                         column: x => x.DishTypeId,
                         principalTable: "DishTypes",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Dishes_PortionTypes_PortionTypeId",
                         column: x => x.PortionTypeId,
                         principalTable: "PortionTypes",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Dishes_Restaurants_RestaurantId",
                         column: x => x.RestaurantId,
@@ -144,25 +114,50 @@ namespace Eathere.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "OrderDish",
+                name: "Orders",
                 columns: table => new
                 {
-                    OrderId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    DishId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    OrderAccepterId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    TableId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    RestaurantId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    OrderStatus = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_OrderDish", x => new { x.OrderId, x.DishId });
+                    table.PrimaryKey("PK_Orders", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_OrderDish_Dishes_DishId",
-                        column: x => x.DishId,
-                        principalTable: "Dishes",
+                        name: "FK_Orders_Restaurants_RestaurantId",
+                        column: x => x.RestaurantId,
+                        principalTable: "Restaurants",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Tables",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    TableName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Capacity = table.Column<int>(type: "int", nullable: false),
+                    IsTaken = table.Column<bool>(type: "bit", nullable: false),
+                    RestaurantId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    OrderId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Tables", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_OrderDish_Orders_OrderId",
+                        name: "FK_Tables_Orders_OrderId",
                         column: x => x.OrderId,
                         principalTable: "Orders",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Tables_Restaurants_RestaurantId",
+                        column: x => x.RestaurantId,
+                        principalTable: "Restaurants",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -183,22 +178,32 @@ namespace Eathere.Migrations
                 column: "RestaurantId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_OrderDish_DishId",
-                table: "OrderDish",
-                column: "DishId");
+                name: "IX_Orders_RestaurantId",
+                table: "Orders",
+                column: "RestaurantId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Restaurants_RestaurantCode",
                 table: "Restaurants",
                 column: "RestaurantCode",
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Tables_OrderId",
+                table: "Tables",
+                column: "OrderId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Tables_RestaurantId",
+                table: "Tables",
+                column: "RestaurantId");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "OrderDish");
+                name: "Dishes");
 
             migrationBuilder.DropTable(
                 name: "Tables");
@@ -207,16 +212,13 @@ namespace Eathere.Migrations
                 name: "Users");
 
             migrationBuilder.DropTable(
-                name: "Dishes");
-
-            migrationBuilder.DropTable(
-                name: "Orders");
-
-            migrationBuilder.DropTable(
                 name: "DishTypes");
 
             migrationBuilder.DropTable(
                 name: "PortionTypes");
+
+            migrationBuilder.DropTable(
+                name: "Orders");
 
             migrationBuilder.DropTable(
                 name: "Restaurants");

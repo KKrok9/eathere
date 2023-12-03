@@ -1,23 +1,23 @@
 <div class="modal-wrapper" *ngIf="restaurantId">
-    <form class="form">
+    <form [formGroup]="fg" class="form" (ngSubmit)="addOrder()">
         <button>X</button>
-        <button>Add dish</button>
         <div class="form-row">
             <p>Dish:</p>
-            <select>
-                <option *ngFor="let dish of dishes" [value]="dish.id">{{ dish.name }}</option>
+            <select formControlName="dishIds">
+                <option *ngFor="let dish of dishes" [ngValue]="dish.id">{{ dish.name }}</option>
             </select>
         </div>
         <div class="form-row">
             <p>Table:</p>
-            <select>
-                <option *ngFor="let table of tables" [value]="table.id">{{ table.tableName }}</option>
+            <select formControlName="table">
+                <option *ngFor="let table of tables" [value]="table.id">{{ table.tableName }}
+                </option>
             </select>
         </div>
         <div>
             <p>Description:</p>
-            <input>
+            <input formControlName="description">
         </div>
-        <button type=" submit">SAVE DISH</button>
+        <button type="submit">ADD ORDER</button>
     </form>
 </div>

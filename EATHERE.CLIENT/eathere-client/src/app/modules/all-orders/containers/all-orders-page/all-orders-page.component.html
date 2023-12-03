@@ -2,8 +2,51 @@
     <div class="button-container">
         <button (click)="toggleIsVisible()">ADD NEW ORDER</button>
     </div>
-    <div class="table-container"></div>
+    <div class="table-container">
+        <div class="description-row">
+            <div class="order-column">
+                <p>Table</p>
+            </div>
+            <div class="order-column">
+                <p>Description</p>
+            </div>
+            <div class="order-column">
+                <p>Dishes</p>
+            </div>
+            <div class="order-column">
+                <p>Price</p>
+            </div>
+            <div class="order-column">
+                <p>Status</p>
+            </div>
+            <div class="order-column">
+                <p></p>
+            </div>
+        </div>
+        <div *ngFor="let order of orders" class="order-row">
+            <div class="order-column">
+                {{selectNameById(tables,order.tableId)}}
+            </div>
+            <div class=" order-column">
+                <p>{{ order.description }}</p>
+            </div>
+            <div class="order-column">
+                <ng-container *ngFor="let dishId of order.dishIds">
+                    <p>{{selectNameById(dishes,dishId)}},</p>
+                </ng-container>
+            </div>
+            <div class="order-column">
+                <p>{{calculateOrderPrice(order.dishIds)}}PLN</p>
+            </div>
+            <div class="order-column">
+                <p>{{order.orderStatus}}</p>
+            </div>
+            <div class="order-column">
+                <button>DELETE</button>
+            </div>
+        </div>
+    </div>
     <ng-container *ngIf="isModalVisible">
-        <app-order-modal [dishes]="dishes" [restaurantId]="restaurant.id"></app-order-modal>
+        <app-order-modal [dishes]="dishes" [restaurantId]="restaurant.id" [tables]="tables"></app-order-modal>
     </ng-container>
 </div>

@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Eathere.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20231030165605_AddedNewTables")]
-    partial class AddedNewTables
+    [Migration("20231203141823_OptionalRestaurantId")]
+    partial class OptionalRestaurantId
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -41,18 +41,15 @@ namespace Eathere.Migrations
                         .HasColumnType("float");
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid?>("DishTypeId")
-                        .IsRequired()
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<double?>("Fats")
                         .HasColumnType("float");
 
                     b.Property<string>("Ingredients")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
@@ -60,7 +57,6 @@ namespace Eathere.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid?>("PortionTypeId")
-                        .IsRequired()
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<double>("Price")
@@ -95,11 +91,16 @@ namespace Eathere.Migrations
                     b.Property<bool>("IsVegan")
                         .HasColumnType("bit");
 
+                    b.Property<Guid>("RestaurantId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("TypeName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("RestaurantId");
 
                     b.ToTable("DishTypes");
                 });
@@ -110,6 +111,15 @@ namespace Eathere.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DishIdsAsString")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("DishIds");
+
                     b.Property<Guid>("OrderAccepterId")
                         .HasColumnType("uniqueidentifier");
 
@@ -117,27 +127,19 @@ namespace Eathere.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<Guid>("RestaurantId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<Guid>("TableId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("RestaurantId");
+
+                    b.HasIndex("TableId");
+
                     b.ToTable("Orders");
-                });
-
-            modelBuilder.Entity("Eathere.Models.OrderDish", b =>
-                {
-                    b.Property<Guid>("OrderId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("DishId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("OrderId", "DishId");
-
-                    b.HasIndex("DishId");
-
-                    b.ToTable("OrderDish");
                 });
 
             modelBuilder.Entity("Eathere.Models.PortionType", b =>
@@ -150,7 +152,12 @@ namespace Eathere.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<Guid>("RestaurantId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("RestaurantId");
 
                     b.ToTable("PortionTypes");
                 });
@@ -174,7 +181,8 @@ namespace Eathere.Migrations
 
                     b.Property<string>("RestaurantCode")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(5)
+                        .HasColumnType("nvarchar(5)");
 
                     b.Property<string>("RestaurantName")
                         .IsRequired()
@@ -208,10 +216,16 @@ namespace Eathere.Migrations
                     b.Property<bool>("IsTaken")
                         .HasColumnType("bit");
 
-                    b.Property<int>("TableNumber")
-                        .HasColumnType("int");
+                    b.Property<Guid>("RestaurantId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("TableName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("RestaurantId");
 
                     b.ToTable("Tables");
                 });
@@ -222,12 +236,18 @@ namespace Eathere.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("BirthdayDate")
+                    b.Property<DateTime?>("BirthdayDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("ContactNumber")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsRestaurantOwner")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -241,21 +261,16 @@ namespace Eathere.Migrations
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid>("RestaurantId")
+                    b.Property<Guid?>("RestaurantId")
                         .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("RoleInRestaurant")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<double?>("Salary")
-                        .HasColumnType("float");
 
                     b.Property<string>("Surname")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("RestaurantId");
 
                     b.ToTable("Users");
                 });
@@ -264,15 +279,11 @@ namespace Eathere.Migrations
                 {
                     b.HasOne("Eathere.Models.DishType", "DishType")
                         .WithMany()
-                        .HasForeignKey("DishTypeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("DishTypeId");
 
                     b.HasOne("Eathere.Models.PortionType", "PortionType")
                         .WithMany()
-                        .HasForeignKey("PortionTypeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("PortionTypeId");
 
                     b.HasOne("Eathere.Models.Restaurant", "Restaurant")
                         .WithMany()
@@ -287,33 +298,65 @@ namespace Eathere.Migrations
                     b.Navigation("Restaurant");
                 });
 
-            modelBuilder.Entity("Eathere.Models.OrderDish", b =>
+            modelBuilder.Entity("Eathere.Models.DishType", b =>
                 {
-                    b.HasOne("Eathere.Models.Dish", "Dish")
-                        .WithMany("OrderDishes")
-                        .HasForeignKey("DishId")
+                    b.HasOne("Eathere.Models.Restaurant", "Restaurant")
+                        .WithMany()
+                        .HasForeignKey("RestaurantId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Eathere.Models.Order", "Order")
-                        .WithMany("OrderDishes")
-                        .HasForeignKey("OrderId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Dish");
-
-                    b.Navigation("Order");
-                });
-
-            modelBuilder.Entity("Eathere.Models.Dish", b =>
-                {
-                    b.Navigation("OrderDishes");
+                    b.Navigation("Restaurant");
                 });
 
             modelBuilder.Entity("Eathere.Models.Order", b =>
                 {
-                    b.Navigation("OrderDishes");
+                    b.HasOne("Eathere.Models.Restaurant", "Restaurant")
+                        .WithMany()
+                        .HasForeignKey("RestaurantId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Eathere.Models.Table", "Table")
+                        .WithMany()
+                        .HasForeignKey("TableId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Restaurant");
+
+                    b.Navigation("Table");
+                });
+
+            modelBuilder.Entity("Eathere.Models.PortionType", b =>
+                {
+                    b.HasOne("Eathere.Models.Restaurant", "Restaurant")
+                        .WithMany()
+                        .HasForeignKey("RestaurantId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Restaurant");
+                });
+
+            modelBuilder.Entity("Eathere.Models.Table", b =>
+                {
+                    b.HasOne("Eathere.Models.Restaurant", "Restaurant")
+                        .WithMany()
+                        .HasForeignKey("RestaurantId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Restaurant");
+                });
+
+            modelBuilder.Entity("Eathere.Models.User", b =>
+                {
+                    b.HasOne("Eathere.Models.Restaurant", "Restaurant")
+                        .WithMany()
+                        .HasForeignKey("RestaurantId");
+
+                    b.Navigation("Restaurant");
                 });
 #pragma warning restore 612, 618
         }

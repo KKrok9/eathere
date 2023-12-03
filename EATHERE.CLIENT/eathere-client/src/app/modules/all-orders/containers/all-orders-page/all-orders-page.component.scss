@@ -20,5 +20,45 @@
         height: 70%;
         width: 80%;
         border: solid 1px;
+
+        .description-row {
+            border: solid 1px;
+            border-radius: 12px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 10%;
+            width: 95%;
+            flex-direction: row;
+
+            .order-column {
+                width: 20%;
+                border: solid 1px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+        }
+
+        .order-row {
+            border: solid 1px;
+            border-radius: 12px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 10%;
+            width: 95%;
+            flex-direction: row;
+
+            .order-column {
+                width: 20%;
+                border: solid 1px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+        }
     }
 }
