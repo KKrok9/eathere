@@ -12,7 +12,7 @@ import { DishService } from 'src/app/services/dish.service';
 export class DishModalComponent implements OnInit {
     @Input() dish!: Dish;
     @Input() restaurantId!: string;
-
+    isModalVisible: boolean = true;
     fg: FormGroup;
     private subscription = new Subscription();
     constructor(
@@ -39,6 +39,9 @@ export class DishModalComponent implements OnInit {
         })
     }
 
+    closeModal(): void {
+        this.isModalVisible = false;
+    }
     updateDish(): void {
         const updatedDish = {
             id: this.dish.id,

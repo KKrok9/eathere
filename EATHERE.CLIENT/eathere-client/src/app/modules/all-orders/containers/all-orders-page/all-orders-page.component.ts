@@ -122,4 +122,29 @@ export class AllOrdersPageComponent implements OnInit {
 
         return price.toString();
     }
+
+    deleteDish(id: string): void {
+        this.subscription.add(
+            this.orderService.deleteOrder(id).subscribe(() => {
+                this.getOrders();
+            }))
+    }
+
+    toggleOrderStatus(order: Order): void {
+        const updatedOrder = {
+            id: order.id,
+            orderAccepterId: order.orderAccepterId,
+            tableId: order.tableId,
+            restaurantId: order.restaurantId,
+            description: order.description,
+            orderStatus: order.orderStatus === "ACTIVE" ? "DONE" : "ACTIVE",
+            dishIds: order.dishIds
+        };
+        this.subscription.add(
+            this.orderService.updateOrder(updatedOrder).subscribe(() => {
+                this.getOrders();
+            })
+        );
+    }
+
 }

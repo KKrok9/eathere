@@ -35,7 +35,7 @@ export class TablesFormComponent implements OnInit {
     addDish(): void {
         if (this.restaurant) {
             const newTable = {
-                tableName: this.fg.value.name,
+                name: this.fg.value.name,
                 capacity: this.fg.value.capacity,
                 isTaken: false,
                 restaurantId: this.restaurant.id
@@ -81,7 +81,7 @@ export class TablesFormComponent implements OnInit {
         if (this.restaurant) {
             const updatedTable = {
                 id: table.id,
-                tableName: table.name,
+                Name: table.name,
                 capacity: table.capacity,
                 isTaken: !table.isTaken,
                 restaurantId: this.restaurant.id

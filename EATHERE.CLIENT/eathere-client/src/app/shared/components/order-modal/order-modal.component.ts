@@ -20,12 +20,15 @@ export class OrderModalComponent implements OnInit {
     private subscription = new Subscription();
 
     constructor(
-        private tableService: TableService,
         private authService: AuthService,
         private fb: FormBuilder,
         private orderService: OrderService
     ) {
         this.fg = this.getFg();
+    }
+
+    closeOrderModal(): void {
+        this.restaurantId = null; // Set restaurantId to null to hide the modal
     }
 
     ngOnInit(): void {

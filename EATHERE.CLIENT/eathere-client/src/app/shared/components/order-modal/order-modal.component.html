@@ -1,6 +1,6 @@
 <div class="modal-wrapper" *ngIf="restaurantId">
     <form [formGroup]="fg" class="form" (ngSubmit)="addOrder()">
-        <button>X</button>
+        <button type="button" (click)="closeOrderModal()">X</button>
         <div class="form-row">
             <p>Dish:</p>
             <select formControlName="dishIds">
@@ -10,7 +10,7 @@
         <div class="form-row">
             <p>Table:</p>
             <select formControlName="table">
-                <option *ngFor="let table of tables" [value]="table.id">{{ table.tableName }}
+                <option *ngFor="let table of tables" [value]="table.id">{{ table.name }}
                 </option>
             </select>
         </div>

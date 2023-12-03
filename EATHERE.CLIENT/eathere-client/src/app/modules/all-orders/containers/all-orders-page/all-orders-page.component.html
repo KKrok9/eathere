@@ -40,9 +40,11 @@
             </div>
             <div class="order-column">
                 <p>{{order.orderStatus}}</p>
+                <button (click)="toggleOrderStatus(order)"> {{order.orderStatus === 'ACTIVE' ? 'DONE' :
+                    'ACTIVATE'}}</button>
             </div>
             <div class="order-column">
-                <button>DELETE</button>
+                <button (click)="deleteDish(order.id)">DELETE</button>
             </div>
         </div>
     </div>

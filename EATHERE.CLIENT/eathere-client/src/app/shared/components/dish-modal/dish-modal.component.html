@@ -1,5 +1,6 @@
-<div class="modal-wrapper">
+<div class="modal-wrapper" *ngIf="isModalVisible">
     <form [formGroup]="fg" class="form" (ngSubmit)="updateDish()">
+        <button type="button" (click)="closeModal()">X</button>
         <div class="form-row">
             <p>Name:</p>
             <input formControlName="name">
