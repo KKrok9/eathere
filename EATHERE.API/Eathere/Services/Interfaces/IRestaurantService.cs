@@ -17,5 +17,6 @@ namespace Eathere.Services.Interfaces
 
         //GET RESTAURANT OF CURRENTLY LOGGED USER
         Task <Restaurant> GetRestaurantOfCurrentlyLoggedUser();
+        Task RegisterUserByRestaurantCode(string restaurantCode);
     }
 }

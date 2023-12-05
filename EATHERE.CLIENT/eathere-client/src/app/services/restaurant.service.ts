@@ -1,7 +1,6 @@
 import { Observable } from "rxjs";
 import { HttpRequestsService } from "./http-requests.service";
 import { Injectable } from "@angular/core";
-import { Restaurant } from "../models/restaurant.model";
 
 @Injectable({
     providedIn: 'root'
@@ -23,6 +22,10 @@ export class RestaurantService extends HttpRequestsService {
 
     getRestaurantOfCurrentlyLoggedUser(): Observable<any> {
         return this.get<any>("Restaurant/GetRestaurantOfCurrentlyLoggedUser");
+    }
+
+    registerUserByRestaurantCode(restaurantCode: string): Observable<any> {
+        return this.post<any>(`Restaurant/RegisterUserByRestaurantCode/${restaurantCode}`, restaurantCode);
     }
 
 

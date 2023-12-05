@@ -70,8 +70,22 @@ namespace Eathere.Services
         {
             var currentlyLoggedUser = await _userService.GetCurrentlyLoggedUser();
             var restaurants = await _repository.GetAllAsync();
-            var thisRestaurant = restaurants.FirstOrDefault(x => x.OwnerId == currentlyLoggedUser.Id);
+            var thisRestaurant = restaurants.FirstOrDefault(x => x.Id == currentlyLoggedUser.RestaurantId);
             return thisRestaurant;
+        }
+
+        public async Task RegisterUserByRestaurantCode(string restaurantCode)
+        {
+            var restaurants = await GetAllRestaurants();
+            var myRestaurant = restaurants.FirstOrDefault(x => x.RestaurantCode == restaurantCode);
+            if (myRestaurant == null)
+            {
+                throw new Exception("Restaurant code isnt correct!");
+            }
+            var currentUser = await _userService.GetCurrentlyLoggedUser();
+            currentUser.RestaurantId = myRestaurant.Id;
+            await _userService.UpdateUserAsync(currentUser);
+
         }
     }
 }

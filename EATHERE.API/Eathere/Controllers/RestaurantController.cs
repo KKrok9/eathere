@@ -1,4 +1,5 @@
 ﻿using Eathere.Models;
+using Eathere.Services;
 using Eathere.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -54,6 +55,13 @@ namespace Eathere.Controllers
                 return NotFound();
             }
             return restaurant;
+        }
+
+        [HttpPost("RegisterUserByRestaurantCode/{restaurantCode}")]
+        public async Task<IActionResult> RegisterUserByRestaurantCode(string restaurantCode)
+        {
+            await _restaurantService.RegisterUserByRestaurantCode(restaurantCode);
+            return Ok();
         }
     }
 }

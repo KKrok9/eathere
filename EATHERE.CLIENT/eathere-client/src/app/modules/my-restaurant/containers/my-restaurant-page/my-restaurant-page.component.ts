@@ -18,6 +18,7 @@ export class MyRestaurantPageComponent implements OnInit {
     fg: FormGroup;
     isFormVisible: boolean = false;
     restaurant!: Restaurant;
+    enteredRestaurantCode: string = "";
     isEdit: { [key: string]: boolean } = {
         country: false,
         city: false,
@@ -31,7 +32,6 @@ export class MyRestaurantPageComponent implements OnInit {
     constructor(
         private userService: UserService,
         private restaurantService: RestaurantService,
-        private authService: AuthService,
         private fb: FormBuilder
     ) {
         this.fg = this.getFg();
@@ -87,7 +87,7 @@ export class MyRestaurantPageComponent implements OnInit {
     getRestaurant() {
         if (this.user) {
             this.subscription.add(
-                this.restaurantService.getRestaurantByOwnerId(this.user.id).subscribe(response => {
+                this.restaurantService.getRestaurantOfCurrentlyLoggedUser().subscribe(response => {
                     this.restaurant = response
                     this.fg.patchValue({
                         country: this.restaurant.country || '',
@@ -135,6 +135,13 @@ export class MyRestaurantPageComponent implements OnInit {
         }
         this.getCurrentUser();
         this.getRestaurant();
+    }
+
+    registerToRestaurantByCode(restaurantCode: any) {
+        this.enteredRestaurantCode = JSON.stringify(restaurantCode);
+        this.restaurantService.registerUserByRestaurantCode(restaurantCode).subscribe((response) => {
+            console.log(response);
+        })
     }
 
 }

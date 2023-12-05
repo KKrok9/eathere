@@ -1,8 +1,14 @@
 <div *ngIf="user!=null" class="page-wrapper">
     <h1>YOUR RESTAURANT</h1>
-    <div *ngIf="user.restaurantId==null && !isFormVisible">
+    <div *ngIf="user.restaurantId==null && !isFormVisible && user.isRestaurantOwner">
         <h1>YOU HAVENT REGISTERED YOUR RESTAURANT YET!</h1>
         <button (click)="setFormVisible()">CLICK ME TO REGISTER</button>
+    </div>
+
+    <div *ngIf="user.restaurantId==null && !isFormVisible && !user.isRestaurantOwner">
+        <h1>YOU HAVENT REGISTERED TO ANY RESTAURANT YET!</h1>
+        <input placeholder="Enter your restaurant code" #codeInput>
+        <button (click)="registerToRestaurantByCode(codeInput.value.toString())">REGISTER ME</button>
     </div>
 
     <form *ngIf="user.restaurantId==null && isFormVisible" [formGroup]="fg" (ngSubmit)="this.addRestaurant()">
@@ -31,13 +37,12 @@
         <button type="submit">ADD RESTAURANT</button>
     </form>
 
-    <!--HAVE TO ADD POSSIBILITY TO JUST ENTER THE CODE-->
-    <!--DO IT IF RESTAURANTID == NULL AND IS NOT OWNER OF RESTAURANT-->
+
     <form [formGroup]="fg" *ngIf="restaurant!=null" class="restaurant-container" (ngSubmit)="updateRestaurant()">
         <div *ngIf="restaurant.restaurantName!=null && !isEdit['restaurantName'] else editRestaurantName"
             class="my-restaurant-element">
             <p>Restaurant name:{{restaurant.restaurantName}} </p>
-            <button (click)="toggleIsToEdit('restaurantName')">EDIT</button>
+            <button *ngIf="user.isRestaurantOwner" (click)="toggleIsToEdit('restaurantName')">EDIT</button>
         </div>
         <ng-template #editRestaurantName>
             <div class="my-restaurant-element-edit">
@@ -48,7 +53,7 @@
 
         <div *ngIf="restaurant.country!=null && !isEdit['country'] else editCountry" class="my-restaurant-element">
             <p>Country:{{restaurant.country}} </p>
-            <button (click)="toggleIsToEdit('country')">EDIT</button>
+            <button *ngIf="user.isRestaurantOwner" (click)="toggleIsToEdit('country')">EDIT</button>
         </div>
         <ng-template #editCountry>
             <div class="my-restaurant-element-edit">
@@ -60,7 +65,7 @@
 
         <div *ngIf="restaurant.street!=null && !isEdit['street'] else editStreet" class="my-restaurant-element">
             <p>Street:{{restaurant.street}} </p>
-            <button (click)="toggleIsToEdit('street')">EDIT</button>
+            <button *ngIf="user.isRestaurantOwner" (click)="toggleIsToEdit('street')">EDIT</button>
         </div>
         <ng-template #editStreet>
             <div class="my-restaurant-element-edit">
@@ -73,7 +78,7 @@
         <div *ngIf="restaurant.streetNumber!=null && !isEdit['streetNumber'] else editStreetNumber"
             class="my-restaurant-element">
             <p>StreetNumber:{{restaurant.streetNumber}} </p>
-            <button (click)="toggleIsToEdit('streetNumber')">EDIT</button>
+            <button *ngIf="user.isRestaurantOwner" (click)="toggleIsToEdit('streetNumber')">EDIT</button>
         </div>
         <ng-template #editStreetNumber>
             <div class="my-restaurant-element-edit">
@@ -86,7 +91,7 @@
             <p>Restaurant code: {{restaurant.restaurantCode}}</p>
         </div>
         <div class="save-button-div">
-            <button class="save-button" type="submit">SAVE</button>
+            <button *ngIf="user.isRestaurantOwner" class="save-button" type="submit">SAVE</button>
         </div>
     </form>
 </div>
