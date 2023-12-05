@@ -49,6 +49,7 @@
         </div>
     </div>
     <ng-container *ngIf="isModalVisible">
-        <app-order-modal [dishes]="dishes" [restaurantId]="restaurant.id" [tables]="tables"></app-order-modal>
+        <app-order-modal [dishes]="dishes" [restaurantId]="restaurant.id" [tables]="tables"
+            [orders]="orders"></app-order-modal>
     </ng-container>
 </div>

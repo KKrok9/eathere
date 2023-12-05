@@ -15,8 +15,10 @@ export class OrderModalComponent implements OnInit {
     @Input() restaurantId: any;
     @Input() dishes: any;
     @Input() tables: any;
+    @Input() orders: any;
     fg: FormGroup;
     currentUserId!: string;
+    selectedDishes: any = [""]
     private subscription = new Subscription();
 
     constructor(
@@ -28,7 +30,7 @@ export class OrderModalComponent implements OnInit {
     }
 
     closeOrderModal(): void {
-        this.restaurantId = null; // Set restaurantId to null to hide the modal
+        this.restaurantId = null;
     }
 
     ngOnInit(): void {
@@ -43,19 +45,21 @@ export class OrderModalComponent implements OnInit {
                 restaurantId: this.restaurantId,
                 description: this.fg.value.description,
                 orderStatus: "ACTIVE",
-                dishIds: [this.fg.value.dishIds]
+                dishIds: this.selectedDishes.flat()
             };
+            this.orders.push(newOrder)
             this.subscription.add(
                 this.orderService.addOrder(newOrder).subscribe((response) => {
-                    console.log(response);
                 })
             )
         }
 
+        this.closeOrderModal();
+
     }
     private getFg() {
         return this.fb.group({
-            dishIds: "",
+            dishIds: [],
             table: "",
             description: ""
         })
@@ -64,5 +68,21 @@ export class OrderModalComponent implements OnInit {
         this.authService.getMyId().subscribe((response) => {
             this.currentUserId = response;
         })
+    }
+
+    addDish() {
+        this.selectedDishes.push("");
+        const dishIdsControl = this.fg.get('dishIds');
+        if (dishIdsControl) {
+            dishIdsControl.setValue("");
+        }
+    }
+
+
+
+    updateSelectedDish(dishId: string, index: number): void {
+        if (dishId !== "") {
+            this.selectedDishes[index] = dishId;
+        }
     }
 }

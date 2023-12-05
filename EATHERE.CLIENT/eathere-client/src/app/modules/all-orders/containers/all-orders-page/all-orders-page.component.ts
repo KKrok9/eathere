@@ -106,22 +106,21 @@ export class AllOrdersPageComponent implements OnInit {
     }
 
     calculateOrderPrice(ids: string[]): string {
-        let dishesInOrder: Dish[] = [];
         let price = 0;
-
-        this.dishes.forEach((element) => {
-            if (ids.includes(element.id)) {
-                dishesInOrder.push(element);
+        const dishOccurrences = new Map<string, number>();
+        ids.forEach((dishId) => {
+            dishOccurrences.set(dishId, (dishOccurrences.get(dishId) || 0) + 1);
+        });
+        dishOccurrences.forEach((occurrences, dishId) => {
+            const dish = this.dishes.find((element) => element.id === dishId);
+            if (dish) {
+                price += dish.price * occurrences;
             }
-        })
-        if (dishesInOrder !== null) {
-            price = dishesInOrder.reduce((accumulator, dish) => {
-                return accumulator + dish.price;
-            }, 0);
-        }
+        });
 
         return price.toString();
     }
+
 
     deleteDish(id: string): void {
         this.subscription.add(
