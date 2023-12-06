@@ -8,7 +8,6 @@ import { Observable } from "rxjs";
 export class OrderService extends HttpRequestsService {
 
     addOrder(dish: any): Observable<any> {
-        console.log(dish);
         return this.post<any>("Order/AddOrder", dish);
     }
 
