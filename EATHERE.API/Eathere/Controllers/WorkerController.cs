@@ -29,10 +29,17 @@ namespace Eathere.Controllers
             return worker;
         }
 
-        [HttpPost("RemoveUserFromRestaurant/{id}")]
-        public async Task<IActionResult> RemoveUserFromRestaurant(Guid id)
+        [HttpPut("RemoveUserFromRestaurant")]
+        public async Task<IActionResult> RemoveUserFromRestaurant(User worker)
         {
-            await _workerService.RemoveUserFromRestaurant(id);
+            await _workerService.RemoveUserFromRestaurant(worker);
+            return Ok();
+        }
+
+        [HttpPut("UpdateWorker")]
+        public async Task<IActionResult> UpdateWorker(User worker)
+        {
+            await _workerService.UpdateWorker(worker);
             return Ok();
         }
     }

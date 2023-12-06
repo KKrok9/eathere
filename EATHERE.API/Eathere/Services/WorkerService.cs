@@ -18,12 +18,12 @@ namespace Eathere.Services
             _restaurantService = restaurantService;
         }
 
-        public async Task RemoveUserFromRestaurant(Guid id)
+        public async Task RemoveUserFromRestaurant(User worker)
         {
-            var workers = await _userService.GetAllUsersAsync();
-            var worker = workers.FirstOrDefault(x=> x.Id==id);
-            worker.RestaurantId = null;
-            await _repository.UpdateAsync(worker);
+            var workerToUpdate = worker;
+            workerToUpdate.RestaurantId = null;
+            workerToUpdate.Restaurant = null;
+            await _repository.UpdateAsync(workerToUpdate);
         }
 
         public async Task<IEnumerable<User>> GetAllWorkersFromRestaurant()
@@ -39,6 +39,11 @@ namespace Eathere.Services
             var workers = await _userService.GetAllUsersAsync();
             var userToReturn = workers.FirstOrDefault(x=> x.Id == id);
             return userToReturn;
+        }
+
+        public async Task UpdateWorker(User worker)
+        {
+            await _repository.UpdateAsync(worker);
         }
     }
 }

@@ -83,7 +83,8 @@ export class MyProfilePageComponent {
             birthdayDate: this.fg.value.birthdayDate,
             contactNumber: this.fg.value.contactNumber,
             restaurantId: this.user.restaurantId,
-            password: this.user.password
+            password: this.user.password,
+            salary: this.user.salary
         };
         this.userService.updateUser(updatedUser).subscribe()
         this.getCurrentUser();

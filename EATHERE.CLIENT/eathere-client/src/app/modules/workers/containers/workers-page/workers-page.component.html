@@ -1,1 +1,59 @@
-<p>workers-page works!</p>
+<div class="page-container">
+    <div class="table-container" *ngIf="workers && currentUser">
+        <div class="description-row">
+            <div class="worker-column">
+                <p>Worker</p>
+            </div>
+            <div *ngIf="currentUser.isRestaurantOwner" class="worker-column">
+                <p>Salary</p>
+            </div>
+            <div class="worker-column">
+                <p>Working since:</p>
+            </div>
+            <div class="worker-column">
+                <p>Born in:</p>
+            </div>
+            <div class="worker-column">
+                <p>Contact number:</p>
+            </div>
+            <div *ngIf="currentUser.isRestaurantOwner" class="worker-column">
+                <p>EMPTY</p>
+            </div>
+        </div>
+        <div *ngFor="let worker of workers; let i = index" class="worker-row">
+            <div class="worker-column">
+                <p *ngIf="worker.isRestaurantOwner">BOSS__</p>
+                <p>{{worker.name}} {{worker.surname}}</p>
+                <p *ngIf="worker.id==currentUser.id">__(YOU)</p>
+            </div>
+            <div *ngIf="currentUser.isRestaurantOwner" class="worker-column">
+                <ng-container *ngIf="currentUser.id !== worker.id; else hideSalaryField">
+                    <ng-container *ngIf="worker.salary && !isEditSalaryFieldVisible[i]; else addSalary">
+                        <p>{{ worker.salary }} PLN</p>
+                        <button (click)="toggleEditSalaryVisible(i)">Edit</button>
+                    </ng-container>
+                    <ng-template #addSalary>
+                        <input #salary type="text" placeholder="Enter salary">
+                        <button (click)="setWorkerSalary(worker, salary.value, i)">Add Salary</button>
+                    </ng-template>
+                </ng-container>
+                <ng-template #hideSalaryField>
+                    <p>CHECK YOUR WALLET</p>
+                </ng-template>
+            </div>
+
+            <div class="worker-column">
+                <p>REGISTER DATE </p>
+            </div>
+            <div class="worker-column">
+                <p>{{worker.birthdayDate}}</p>
+            </div>
+            <div class="worker-column">
+                <p>{{worker.contactNumber}}</p>
+            </div>
+            <div *ngIf="currentUser.isRestaurantOwner" class="worker-column">
+                <button (click)="fireWorker(worker)">FIRE</button>
+            </div>
+        </div>
+    </div>
+</div>

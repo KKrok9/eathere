@@ -142,6 +142,6 @@ export class MyRestaurantPageComponent implements OnInit {
         this.restaurantService.registerUserByRestaurantCode(restaurantCode).subscribe((response) => {
             console.log(response);
         })
+        window.location.reload();
     }
-
 }

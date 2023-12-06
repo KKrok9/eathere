@@ -8,4 +8,5 @@ export interface User {
     birthdayDate: string;
     isRestaurantOwner: boolean;
     restaurantId: string;
+    salary?: string;
 }

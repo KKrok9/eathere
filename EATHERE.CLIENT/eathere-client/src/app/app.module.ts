@@ -11,6 +11,8 @@ import { DishesListModule } from './modules/dishes-list/dishes-list.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModule } from './shared/shared.module';
 import { AllOrdersModule } from './modules/all-orders/all-orders.module';
+import { WorkersModule } from './modules/workers/workers.module';
+import { StatisticsModule } from './modules/statistics/statistics.module';
 
 @NgModule({
     declarations: [
@@ -27,6 +29,8 @@ import { AllOrdersModule } from './modules/all-orders/all-orders.module';
         AllOrdersModule,
         DishesListModule,
         BrowserAnimationsModule,
+        WorkersModule,
+        StatisticsModule,
         SharedModule
     ],
     providers: [],
