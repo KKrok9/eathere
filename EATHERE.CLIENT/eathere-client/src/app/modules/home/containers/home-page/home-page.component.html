@@ -15,8 +15,10 @@
             <app-tables-form></app-tables-form>
         </div>
         <div class="active-orders-div">
+            <app-active-orders [orders]="activeOrders" [tables]="tables" [dishes]="dishes"
+                (orderDone)="makeOrderDone($event)"></app-active-orders>
         </div>
-        <div class="third-div">
+        <div class=" third-div">
 
         </div>
         <div class="fourth-div">

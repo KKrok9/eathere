@@ -1,9 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import { Dish } from 'src/app/models/dish.model';
-import { Table } from 'src/app/models/table.model';
-import { AuthService, DishService, OrderService, TableService } from 'src/app/services';
+import { AuthService, OrderService } from 'src/app/services';
 
 @Component({
     selector: 'app-order-modal',
