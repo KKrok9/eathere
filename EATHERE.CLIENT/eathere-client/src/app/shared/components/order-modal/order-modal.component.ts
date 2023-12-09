@@ -43,7 +43,7 @@ export class OrderModalComponent implements OnInit {
                 restaurantId: this.restaurantId,
                 description: this.fg.value.description,
                 orderStatus: "ACTIVE",
-                dishIds: this.selectedDishes.flat()
+                dishIds: this.selectedDishes.flat(),
             };
             this.orders.push(newOrder)
             this.subscription.add(

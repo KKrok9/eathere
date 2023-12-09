@@ -1,4 +1,3 @@
-import { Dish } from "./dish.model";
 
 export interface Order {
     id: string;
@@ -8,4 +7,5 @@ export interface Order {
     description?: string;
     orderStatus: string;
     dishIds: string[];
+    orderDate: Date;
 }

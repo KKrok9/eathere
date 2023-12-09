@@ -1,14 +1,14 @@
 <div class="form-wrapper">
     <div class="description-row">
         <div class="table-col">
-            <p>Order:</p>
+            <p>Order</p>
         </div>
         <div class="table-col">
             <p>Table</p>
         </div>
 
         <div class="table-col">
-            <p>Date</p>
+            <p>Made at</p>
         </div>
         <div class="table-col">
         </div>
@@ -24,7 +24,7 @@
                 <p> {{selectNameById(tables,order.tableId)}}</p>
             </div>
             <div class="table-col">
-                <p>12/11/2001</p>
+                <p>{{ order.orderDate | date:'HH:mm' }}</p>
             </div>
             <div class="table-col">
                 <button (click)="makeOrderDone(order)">DONE</button>

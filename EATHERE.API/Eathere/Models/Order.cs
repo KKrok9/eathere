@@ -18,6 +18,9 @@ namespace Eathere.Models
         public virtual Table? Table { get; set; }
         public Guid RestaurantId { get; set; }
         [ForeignKey("RestaurantId")]
+
+        //[DatabaseGenerated(DatabaseGeneratedOption.Computed)]
+        public DateTime? OrderDate { get; set; }
         public virtual Restaurant? Restaurant { get; set; }
         public string OrderStatus { get; set; }
         public string Description { get; set; }
@@ -30,5 +33,11 @@ namespace Eathere.Models
             get => DishIds != null ? string.Join(",", DishIds.Select(id => id.ToString().ToUpper())) : null;
             set => DishIds = value?.Split(',').Select(Guid.Parse).ToList();
         }
+        public Order()
+        {
+            TimeZoneInfo warsawTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Central European Standard Time");
+            this.OrderDate = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, warsawTimeZone);
+        }
+
     }
 }

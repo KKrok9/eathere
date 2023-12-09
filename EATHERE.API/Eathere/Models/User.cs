@@ -22,5 +22,10 @@ namespace Eathere.Models
         [ForeignKey("RestaurantId")]
         public virtual Restaurant? Restaurant { get; set; }
         public double? Salary { get; set; }
+
+        public User()
+        {
+            RegisterDate = DateTime.UtcNow;
+        }
     }
 }
