@@ -30,8 +30,8 @@ import { StatisticsModule } from './modules/statistics/statistics.module';
         DishesListModule,
         BrowserAnimationsModule,
         WorkersModule,
-        StatisticsModule,
-        SharedModule
+        SharedModule,
+        StatisticsModule
     ],
     providers: [],
     bootstrap: [AppComponent]

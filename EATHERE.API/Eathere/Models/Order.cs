@@ -18,8 +18,6 @@ namespace Eathere.Models
         public virtual Table? Table { get; set; }
         public Guid RestaurantId { get; set; }
         [ForeignKey("RestaurantId")]
-
-        //[DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public DateTime? OrderDate { get; set; }
         public virtual Restaurant? Restaurant { get; set; }
         public string OrderStatus { get; set; }
