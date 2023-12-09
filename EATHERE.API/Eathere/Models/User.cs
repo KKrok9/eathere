@@ -24,7 +24,7 @@ namespace Eathere.Models
         public User()
         {
             TimeZoneInfo warsawTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Central European Standard Time");
-            this.OrderDate = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, warsawTimeZone);
+            this.RegisterDate = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, warsawTimeZone);
         }
     }
 }

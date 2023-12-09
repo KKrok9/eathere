@@ -10,24 +10,34 @@
         </div>
         <div class="configuration-div">
             <div class="dish-type-div">
-                <p>DISH TYPE</p>
-                <select></select>
-                <input>
-                <button>ADD</button>
+                <div class="dish-types-list-div">
+                    <p>DISH TYPES AVAILABLE</p>
+                    <select></select>
+                </div>
+                <div class="dish-types-add-div">
+                    <p>ADD NEW DISH TYPE</p>
+                    <input>
+                    <button>ADD</button>
+                </div>
             </div>
-            <div class="portion-type-div">
-                <p>PORTION TYPE</p>
-                <select></select>
-                <input>
-                <button>ADD</button>
+            <div class="portion-types-div">
+                <div class="portion-types-list-div">
+                    <p>PORTION TYPE</p>
+                    <select></select>
+                </div>
+                <div class="portion-types-add-div">
+                    <p>ADD NEW PORTION TYPE</p>
+                    <input>
+                    <button>ADD</button>
+                </div>
             </div>
         </div>
         <div class=" third-div">
             <h2>TRENDS OF THE MONTH</h2>
             <h3>MOST OFTEN ORDERED:{{findMostAndLeastOrderedDishes(thisMonthOrders,dishes).mostOrdered?.name}}</h3>
-            <h3>LEAST OFTEN ORDERED:{{findMostAndLeastOrderedDishes(thisMonthOrders,dishes).leastOrdered?.name}}</h3>
+            <h3>LEAST OFTEN ORDERED:{{findMostAndLeastOrderedDishes(thisMonthOrders,dishes).leastOrdered?.name}}
+            </h3>
             <h3>BIGGEST ORDER:{{findMostExpensiveOrder(thisMonthOrders,dishes).totalPrice}}PLN</h3>
-            <button>SHOW</button>
             <h3>ORDERS THIS MONTH: {{thisMonthOrders.length}}</h3>
         </div>
     </div>
