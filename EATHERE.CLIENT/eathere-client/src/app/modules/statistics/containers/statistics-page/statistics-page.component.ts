@@ -1,11 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Dish } from 'src/app/models/dish.model';
+import { DishType } from 'src/app/models/dishType.model';
 import { Order } from 'src/app/models/order.model';
+import { PortionType } from 'src/app/models/portionType.model';
 import { Restaurant } from 'src/app/models/restaurant.model';
 import { Table } from 'src/app/models/table.model';
 import { User } from 'src/app/models/user.model';
 import { DishService, OrderService, RestaurantService, TableService, WorkerService } from 'src/app/services';
+import { DishTypeService } from 'src/app/services/dishType.service';
+import { PortionTypeService } from 'src/app/services/portionType.service';
 
 @Component({
     selector: 'app-statistics-page',
@@ -18,7 +22,9 @@ export class StatisticsPageComponent implements OnInit {
     workers: User[] = []; //TO CHANGE!
     orders: Order[] = [];
     thisMonthOrders: Order[] = [];
-    dishes: Dish[] = []
+    dishes: Dish[] = [];
+    dishTypes: DishType[] = [];
+    portionTypes: PortionType[] = [];
     salarySum: number = 0;
 
     private subscription = new Subscription();
@@ -26,7 +32,9 @@ export class StatisticsPageComponent implements OnInit {
         private restaurantService: RestaurantService,
         private orderService: OrderService,
         private dishService: DishService,
-        private workerService: WorkerService
+        private workerService: WorkerService,
+        private dishTypeService: DishTypeService,
+        private portionTypeService: PortionTypeService
     ) {
     }
     ngOnInit(): void {
@@ -42,6 +50,8 @@ export class StatisticsPageComponent implements OnInit {
                     if (this.restaurant) {
                         this.getDishes();
                         this.getOrders();
+                        this.getDishTypes();
+                        this.getPortionTypes();
                     }
                 }
             )
@@ -194,6 +204,69 @@ export class StatisticsPageComponent implements OnInit {
         });
 
         return { order: mostExpensiveOrder, totalPrice: highestTotalPrice };
+    }
+
+    addDishType(name: string): void {
+        const dishType: any = {
+            name: name,
+            restaurantId: this.restaurant.id
+        }
+        this.subscription.add(
+            this.dishTypeService.addDishType(dishType).subscribe(
+                (response) => {
+                    console.log(response);
+                    this.getDishTypes();
+                },
+                (error) => {
+                    console.log(error);
+                }
+            )
+        )
+    }
+
+    getDishTypes(): void {
+        this.subscription.add(
+            this.dishTypeService.getAllDishTypesFromRestaurant(this.restaurant.id).subscribe(
+                (response) => {
+                    this.dishTypes = response;
+                },
+                (error) => {
+                    console.log(error);
+                }
+            )
+        )
+    }
+
+    addPortionType(name: string): void {
+        const portionType: any = {
+            name: name,
+            restaurantId: this.restaurant.id
+        }
+        this.subscription.add(
+            this.portionTypeService.addPortionType(portionType).subscribe(
+                (response) => {
+                    console.log(response);
+                    this.getPortionTypes();
+
+                },
+                (error) => {
+                    console.log(error);
+                }
+            )
+        )
+    }
+
+    getPortionTypes(): void {
+        this.subscription.add(
+            this.portionTypeService.getAllPortionTypesFromRestaurant(this.restaurant.id).subscribe(
+                (response) => {
+                    this.portionTypes = response;
+                },
+                (error) => {
+                    console.log(error);
+                }
+            )
+        )
     }
 
 

@@ -12,23 +12,31 @@
             <div class="dish-type-div">
                 <div class="dish-types-list-div">
                     <p>DISH TYPES AVAILABLE</p>
-                    <select></select>
+                    <select>
+                        <option *ngFor="let dishType of dishTypes" [value]="dishType.id">{{ dishType.name }}
+                        </option>
+                    </select>
+                    <button>DELETE</button>
                 </div>
                 <div class="dish-types-add-div">
                     <p>ADD NEW DISH TYPE</p>
-                    <input>
-                    <button>ADD</button>
+                    <input #dishType>
+                    <button (click)="addDishType(dishType.value.toString())">ADD</button>
                 </div>
             </div>
             <div class="portion-types-div">
                 <div class="portion-types-list-div">
                     <p>PORTION TYPE</p>
-                    <select></select>
+                    <select>
+                        <option *ngFor="let portionType of portionTypes" [value]="portionType.id">{{ portionType.name }}
+                        </option>
+                    </select>
+                    <button>DELETE</button>
                 </div>
                 <div class="portion-types-add-div">
                     <p>ADD NEW PORTION TYPE</p>
-                    <input>
-                    <button>ADD</button>
+                    <input #portionType>
+                    <button (click)="addPortionType(portionType.value.toString())">ADD</button>
                 </div>
             </div>
         </div>

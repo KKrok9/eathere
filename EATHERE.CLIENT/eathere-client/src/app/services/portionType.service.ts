@@ -20,6 +20,6 @@ export class PortionTypeService extends HttpRequestsService {
     }
 
     getAllPortionTypesFromRestaurant(restaurantId: any): Observable<any> {
-        return this.get<any>(`Portion/GetAllPortionTypesFromRestaurant/${restaurantId}`);
+        return this.get<any>(`PortionType/GetAllPortionTypesFromRestaurant/${restaurantId}`);
     }
 }

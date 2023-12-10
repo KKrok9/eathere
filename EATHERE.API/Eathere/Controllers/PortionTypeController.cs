@@ -22,7 +22,7 @@ namespace Eathere.Controllers
             return Ok(new { message = "Added new portion Type!" });
         }
 
-        [HttpGet("GetPortionById/{id}")]
+        [HttpGet("GetPortionTypeById/{id}")]
         public async Task<ActionResult<PortionType>> GetPortionTypeById(Guid id)
         {
             var portionType = await _portionTypeService.GetPortionTypeById(id);
