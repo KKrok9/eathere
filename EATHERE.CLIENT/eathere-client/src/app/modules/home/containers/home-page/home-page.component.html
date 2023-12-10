@@ -1,13 +1,19 @@
 <div class="page-container">
     <div class="header">
-        <div class="date-div">
-            01.12.2023
+        <div class="header-div">
+            <p>
+                01.12.2023
+            </p>
         </div>
-        <div class="hour-div">
-            16:20
+        <div class="header-div">
+            <p>
+                13:33
+            </p>
         </div>
-        <div class="logged-user-div">
-            Kacper Krok
+        <div class="header-div">
+            <p>
+                Kacper Krok
+            </p>
         </div>
     </div>
     <div class="main-content">
@@ -19,14 +25,17 @@
                 (orderDone)="makeOrderDone($event)"></app-active-orders>
         </div>
         <div class=" third-div">
-            <h2>Free tables:{{freeTablesCount}}</h2>
-            <h2>Free seats:{{freeSeatsCount}}</h2>
-            <h2>Active orders:{{activeOrders.length}}</h2>
+            <div class="wrapper">
+                <h2>Free tables:{{freeTablesCount}}</h2>
+                <h2>Free seats:{{freeSeatsCount}}</h2>
+                <h2>Active orders:{{activeOrders.length}}</h2>
+            </div>
         </div>
         <div class="fourth-div">
-            <h2>Orders today:{{todaysOrders.length}}</h2>
-            <h2>Todays income:{{calculateTodaysIncome()}}PLN</h2>
-
+            <div class="wrapper">
+                <h2>Orders today:{{todaysOrders.length}}</h2>
+                <h2>Todays income:{{calculateTodaysIncome()}}PLN</h2>
+            </div>
         </div>
     </div>
 </div>

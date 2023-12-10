@@ -38,7 +38,7 @@
             <div class="order-column">
                 <p>{{calculateOrderPrice(order.dishIds)}}PLN</p>
             </div>
-            <div class="order-column">
+            <div class="order-column space-around">
                 <p>{{order.orderStatus}}</p>
                 <button (click)="toggleOrderStatus(order)"> {{order.orderStatus === 'ACTIVE' ? 'DONE' :
                     'ACTIVATE'}}</button>

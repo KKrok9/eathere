@@ -1,32 +1,32 @@
 <div class="form-wrapper">
     <div class="description-row">
-        <div class="table-col">
+        <div class="order-col">
             <p>Order</p>
         </div>
-        <div class="table-col">
+        <div class="order-col">
             <p>Table</p>
         </div>
 
-        <div class="table-col">
+        <div class="order-col">
             <p>Made at</p>
         </div>
-        <div class="table-col">
+        <div class="order-col">
         </div>
     </div>
-    <div class="tables-container">
-        <div *ngFor="let order of orders" class="table-row">
-            <div class=" table-col">
+    <div class="orders-container">
+        <div *ngFor="let order of orders" class="order-row">
+            <div class=" order-col">
                 <ng-container *ngFor="let dishId of order.dishIds; let last = last">
                     <p>{{ selectNameById(dishes, dishId) }}{{ !last ? ',' : '' }} </p>
                 </ng-container>
             </div>
-            <div class="table-col">
+            <div class="order-col">
                 <p> {{selectNameById(tables,order.tableId)}}</p>
             </div>
-            <div class="table-col">
+            <div class="order-col">
                 <p>{{ order.orderDate | date:'HH:mm' }}</p>
             </div>
-            <div class="table-col">
+            <div class="order-col">
                 <button (click)="makeOrderDone(order)">DONE</button>
             </div>
         </div>

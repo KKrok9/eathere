@@ -1,12 +1,14 @@
 <div class="page-container">
     <div class="main-content">
         <div class="money-div">
-            <h2>How about your money in this month?</h2>
-            <h3>Income from orders: {{getIncomeFromOrders()}}PLN </h3>
-            <h3>Salaries: {{getSalarySum()}}PLN</h3>
-            <h3>Balance: {{getIncomeFromOrders() - getSalarySum()}}PLN</h3>
-            <h3>Biggest salary:{{getBiggestSalaryOwner()?.name}} {{getBiggestSalaryOwner()?.surname}}
-                {{getBiggestSalaryOwner()?.salary}}PLN</h3>
+            <div class="list">
+                <h2>How about your money in this month?</h2>
+                <h3>Income from orders: {{getIncomeFromOrders()}}PLN </h3>
+                <h3>Salaries: {{getSalarySum()}}PLN</h3>
+                <h3>Balance: {{getIncomeFromOrders() - getSalarySum()}}PLN</h3>
+                <h3>Biggest salary:{{getBiggestSalaryOwner()?.name}} {{getBiggestSalaryOwner()?.surname}}
+                    {{getBiggestSalaryOwner()?.salary}}PLN</h3>
+            </div>
         </div>
         <div class="configuration-div">
             <div class="dish-type-div">
@@ -28,7 +30,8 @@
                 <div class="portion-types-list-div">
                     <p>PORTION TYPE</p>
                     <select>
-                        <option *ngFor="let portionType of portionTypes" [value]="portionType.id">{{ portionType.name }}
+                        <option *ngFor="let portionType of portionTypes" [value]="portionType.id">{{
+                            portionType.name }}
                         </option>
                     </select>
                     <button>DELETE</button>
@@ -41,12 +44,15 @@
             </div>
         </div>
         <div class=" third-div">
-            <h2>TRENDS OF THE MONTH</h2>
-            <h3>MOST OFTEN ORDERED:{{findMostAndLeastOrderedDishes(thisMonthOrders,dishes).mostOrdered?.name}}</h3>
-            <h3>LEAST OFTEN ORDERED:{{findMostAndLeastOrderedDishes(thisMonthOrders,dishes).leastOrdered?.name}}
-            </h3>
-            <h3>BIGGEST ORDER:{{findMostExpensiveOrder(thisMonthOrders,dishes).totalPrice}}PLN</h3>
-            <h3>ORDERS THIS MONTH: {{thisMonthOrders.length}}</h3>
+            <div class="list">
+                <h2>TRENDS OF THE MONTH</h2>
+                <h3>MOST OFTEN ORDERED:{{findMostAndLeastOrderedDishes(thisMonthOrders,dishes).mostOrdered?.name}}
+                </h3>
+                <h3>LEAST OFTEN ORDERED:{{findMostAndLeastOrderedDishes(thisMonthOrders,dishes).leastOrdered?.name}}
+                </h3>
+                <h3>BIGGEST ORDER:{{findMostExpensiveOrder(thisMonthOrders,dishes).totalPrice}}PLN</h3>
+                <h3>ORDERS THIS MONTH: {{thisMonthOrders.length}}</h3>
+            </div>
         </div>
     </div>
 </div>

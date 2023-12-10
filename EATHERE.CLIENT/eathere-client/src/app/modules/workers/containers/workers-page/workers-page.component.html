@@ -22,15 +22,15 @@
         </div>
         <div *ngFor="let worker of workers; let i = index" class="worker-row">
             <div class="worker-column">
-                <p *ngIf="worker.isRestaurantOwner">BOSS__</p>
+                <p *ngIf="worker.isRestaurantOwner">BOSS-</p>
                 <p>{{worker.name}} {{worker.surname}}</p>
-                <p *ngIf="worker.id==currentUser.id">__(YOU)</p>
+                <p *ngIf="worker.id==currentUser.id">(YOU)</p>
             </div>
-            <div *ngIf="currentUser.isRestaurantOwner" class="worker-column">
+            <div *ngIf="currentUser.isRestaurantOwner" class="worker-column space-around">
                 <ng-container *ngIf="currentUser.id !== worker.id; else hideSalaryField">
                     <ng-container *ngIf="worker.salary && !isEditSalaryFieldVisible[i]; else addSalary">
                         <p>{{ worker.salary }} PLN</p>
-                        <button (click)="toggleEditSalaryVisible(i)">Edit</button>
+                        <button (click)="toggleEditSalaryVisible(i)" class="edit-salary-button">Edit</button>
                     </ng-container>
                     <ng-template #addSalary>
                         <input #salary type="text" placeholder="Enter salary">

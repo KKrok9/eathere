@@ -1,3 +1,8 @@
+p {
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+}
+
 .page-container {
     width: 100%;
     height: 100%;
@@ -12,6 +17,10 @@
         display: flex;
         flex-direction: column;
         justify-content: space-between;
+        background: white;
+        border-radius: 12px;
+        padding-top: 1%;
+        padding-bottom: 1%;
 
         .first-row {
             width: 100%;
@@ -28,7 +37,13 @@
                 height: 90%;
 
                 input {
-                    height: 15%;
+                    height: 25%;
+                    background-color: aliceblue;
+                    border: none;
+                }
+
+                input::placeholder {
+                    color: black;
                 }
             }
 
@@ -39,6 +54,12 @@
                 input {
                     height: 100%;
                     width: 100%;
+                    background-color: aliceblue;
+                    border: none;
+                }
+
+                input::placeholder {
+                    color: black;
                 }
             }
 
@@ -49,6 +70,12 @@
                 input {
                     height: 100%;
                     width: 100%;
+                    background-color: aliceblue;
+                    border: none;
+                }
+
+                input::placeholder {
+                    color: black;
                 }
             }
 
@@ -61,6 +88,12 @@
 
                 input {
                     height: 15%;
+                    background-color: aliceblue;
+                    border: none;
+                }
+
+                input::placeholder {
+                    color: black;
                 }
             }
         }
@@ -68,7 +101,6 @@
         .second-row {
             width: 100%;
             height: 20%;
-            border: solid 1px;
 
             .add-dish-btn-div {
                 width: 100%;
@@ -77,9 +109,25 @@
                 justify-content: center;
                 align-items: center;
 
+
                 button {
+                    height: 100%;
                     width: 30%;
-                    height: 80%;
+                    color: black;
+                    background-color: white;
+                    font-size: 16px;
+                    border: none;
+                    font-family: 'Courier New', Courier, monospace;
+                    font-weight: bold;
+                    transition: background-color 0.3s ease;
+                    border: solid 1px;
+                    border-radius: 12px;
+                }
+
+                button:hover {
+                    background-color: #36A9AE;
+                    color: whitesmoke;
+                    border: none;
                 }
             }
 
@@ -88,15 +136,16 @@
 
     .table-container {
         width: 80%;
-        border: solid 1px;
         border-radius: 12px;
         height: 70%;
         display: flex;
         flex-direction: column;
         align-items: center;
+        background-color: white;
+        margin-top: 10px;
 
         .description-row {
-            border: solid 1px;
+
             border-radius: 12px;
             display: flex;
             justify-content: center;
@@ -104,10 +153,10 @@
             height: 10%;
             width: 95%;
             flex-direction: row;
+            border-bottom: solid 1px;
 
             .dish-column {
                 width: 20%;
-                border: solid 1px;
                 display: flex;
                 justify-content: center;
                 align-items: center;
@@ -116,7 +165,6 @@
         }
 
         .dish-row {
-            border: solid 1px;
             border-radius: 12px;
             display: flex;
             justify-content: center;
@@ -124,13 +172,33 @@
             height: 10%;
             width: 95%;
             flex-direction: row;
+            border-bottom: solid 1px;
 
             .dish-column {
                 width: 20%;
-                border: solid 1px;
                 display: flex;
                 justify-content: center;
                 align-items: center;
+
+                button {
+                    height: 40px;
+                    width: 90px;
+                    color: black;
+                    background-color: white;
+                    font-size: 16px;
+                    border: none;
+                    font-family: 'Courier New', Courier, monospace;
+                    font-weight: bold;
+                    transition: background-color 0.3s ease;
+                    border: solid 1px;
+                    border-radius: 12px;
+                }
+
+                button:hover {
+                    background-color: #36A9AE;
+                    color: whitesmoke;
+                    border: none;
+                }
             }
 
         }

@@ -1,7 +1,6 @@
 .page-wrapper {
     width: 100%;
     height: 100%;
-    border: solid 1px blue;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -10,12 +9,12 @@
     .profile-container {
         width: 30%;
         height: 70%;
-        border: solid 1px black;
         border-radius: 12px;
         display: flex;
         justify-content: space-around;
         align-items: center;
         flex-direction: column;
+        background-color: white;
 
         .my-profile-element {
             width: 90%;
@@ -24,6 +23,26 @@
             display: flex;
             justify-content: space-between;
             padding: 5%;
+            align-items: center;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 18px;
+
+            button {
+                height: 40px;
+                width: 70px;
+                color: black;
+                background-color: white;
+                font-size: 22px;
+                border: none;
+                font-family: 'Courier New', Courier, monospace;
+                font-weight: bold;
+                transition: background-color 0.3s ease;
+            }
+
+            button:hover {
+                background-color: #36A9AE;
+                color: whitesmoke;
+            }
         }
 
         .my-profile-element-edit {
@@ -50,6 +69,14 @@
                 width: 50%;
                 height: 80%;
                 border-radius: 12px;
+                color: white;
+                background-color: black;
+                border: none;
+            }
+
+            button:hover {
+                background-color: #36A9AE;
+                color: whitesmoke;
             }
         }
     }
