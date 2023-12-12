@@ -7,7 +7,7 @@ import { PortionType } from 'src/app/models/portionType.model';
 import { Restaurant } from 'src/app/models/restaurant.model';
 import { Table } from 'src/app/models/table.model';
 import { User } from 'src/app/models/user.model';
-import { DishService, OrderService, RestaurantService, TableService, WorkerService } from 'src/app/services';
+import { DishService, OrderService, RestaurantService, TableService, UserService, WorkerService } from 'src/app/services';
 import { DishTypeService } from 'src/app/services/dishType.service';
 import { PortionTypeService } from 'src/app/services/portionType.service';
 
@@ -26,6 +26,7 @@ export class StatisticsPageComponent implements OnInit {
     dishTypes: DishType[] = [];
     portionTypes: PortionType[] = [];
     salarySum: number = 0;
+    user!: User;
 
     private subscription = new Subscription();
     constructor(
@@ -34,12 +35,14 @@ export class StatisticsPageComponent implements OnInit {
         private dishService: DishService,
         private workerService: WorkerService,
         private dishTypeService: DishTypeService,
-        private portionTypeService: PortionTypeService
+        private portionTypeService: PortionTypeService,
+        private userService: UserService
     ) {
     }
     ngOnInit(): void {
         this.getRestaurant();
         this.getWorkers();
+        this.getUser();
     }
 
     private getRestaurant() {
@@ -266,6 +269,17 @@ export class StatisticsPageComponent implements OnInit {
                     console.log(error);
                 }
             )
+        )
+    }
+
+    private getUser(): void {
+        this.subscription.add(
+            this.userService.getCurrentlyLoggedUser().subscribe((response) => {
+                this.user = response;
+            },
+                (error) => {
+                    console.log(error);
+                })
         )
     }
 

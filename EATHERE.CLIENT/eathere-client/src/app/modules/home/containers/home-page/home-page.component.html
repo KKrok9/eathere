@@ -2,17 +2,17 @@
     <div class="header">
         <div class="header-div">
             <p>
-                01.12.2023
+                {{ currentTime | date:'dd.MM.yyyy' }}
             </p>
         </div>
         <div class="header-div">
             <p>
-                13:33
+                {{ currentTime | date:'HH:mm' }}
             </p>
         </div>
-        <div class="header-div">
+        <div class="header-div" *ngIf="user">
             <p>
-                Kacper Krok
+                {{user.name}} {{user.surname}}
             </p>
         </div>
     </div>

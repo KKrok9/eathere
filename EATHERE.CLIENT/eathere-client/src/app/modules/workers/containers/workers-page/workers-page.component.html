@@ -43,10 +43,10 @@
             </div>
 
             <div class="worker-column">
-                <p>REGISTER DATE </p>
+                <p>{{worker.registerDate | date:'dd.MM.yyyy'}} </p>
             </div>
             <div class="worker-column">
-                <p>{{worker.birthdayDate}}</p>
+                <p>{{worker.birthdayDate | date:'dd.MM.yyyy'}}</p>
             </div>
             <div class="worker-column">
                 <p>{{worker.contactNumber}}</p>

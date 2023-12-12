@@ -14,6 +14,9 @@
                 <p>Dishes</p>
             </div>
             <div class="order-column">
+                <p>Date</p>
+            </div>
+            <div class="order-column">
                 <p>Price</p>
             </div>
             <div class="order-column">
@@ -34,6 +37,9 @@
                 <ng-container *ngFor="let dishId of order.dishIds">
                     <p>{{selectNameById(dishes,dishId)}},</p>
                 </ng-container>
+            </div>
+            <div class="order-column">
+                <p>{{order.orderDate | date:'dd.MM.yyyy'}}</p>
             </div>
             <div class="order-column">
                 <p>{{calculateOrderPrice(order.dishIds)}}PLN</p>

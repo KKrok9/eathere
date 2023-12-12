@@ -11,17 +11,18 @@ import { MyRestaurantModule } from './modules/my-restaurant/my-restaurant.module
 import { MyRestaurantPageComponent } from './modules/my-restaurant/containers/my-restaurant-page/my-restaurant-page.component';
 import { AllOrdersPageComponent } from './modules/all-orders/containers/all-orders-page/all-orders-page.component';
 import { DishesListPageComponent } from './modules/dishes-list/containers/dishes-list-page/dishes-list-page.component';
+import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
     { path: '', component: LoginPageComponent },
     { path: 'register', component: RegisterPageComponent },
-    { path: 'home', component: HomePageComponent },
-    { path: 'my-profile', component: MyProfilePageComponent },
-    { path: 'dishes-list', component: DishesListPageComponent },
-    { path: 'all-orders', component: AllOrdersPageComponent },
-    { path: 'my-restaurant', component: MyRestaurantPageComponent },
-    { path: 'statistics', component: StatisticsPageComponent },
-    { path: 'workers', component: WorkersPageComponent },
+    { path: 'home', component: HomePageComponent, canActivate: [AuthGuard] },
+    { path: 'my-profile', component: MyProfilePageComponent, canActivate: [AuthGuard] },
+    { path: 'dishes-list', component: DishesListPageComponent, canActivate: [AuthGuard] },
+    { path: 'all-orders', component: AllOrdersPageComponent, canActivate: [AuthGuard] },
+    { path: 'my-restaurant', component: MyRestaurantPageComponent, canActivate: [AuthGuard] },
+    { path: 'statistics', component: StatisticsPageComponent, canActivate: [AuthGuard] },
+    { path: 'workers', component: WorkersPageComponent, canActivate: [AuthGuard] },
 ];
 
 @NgModule({

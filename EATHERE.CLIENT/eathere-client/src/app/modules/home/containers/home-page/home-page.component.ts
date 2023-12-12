@@ -20,21 +20,26 @@ export class HomePageComponent implements OnInit {
     orders: Order[] = [];
     activeOrders: Order[] = [];
     tables: Table[] = [];
-    dishes: Dish[] = []
+    dishes: Dish[] = [];
+    user!: User;
     freeTablesCount: number = 0;
     freeSeatsCount: number = 0;
     activeOrdersCount: number = 0;
     todaysOrders: Order[] = [];
     private subscription = new Subscription();
+    currentTime: Date = new Date();
 
     constructor(private tableService: TableService,
         private restaurantService: RestaurantService,
         private orderService: OrderService,
-        private dishService: DishService
+        private dishService: DishService,
+        private userService: UserService
     ) {
     }
     ngOnInit(): void {
+        this.getUser();
         this.getRestaurant();
+        this.refreshTime()
     }
 
 
@@ -168,6 +173,20 @@ export class HomePageComponent implements OnInit {
             })
         }
         return sum;
+    }
+
+    private getUser(): void {
+        this.subscription.add(
+            this.userService.getCurrentlyLoggedUser().subscribe((response) => {
+                this.user = response;
+            })
+        )
+    }
+
+    private refreshTime(): void {
+        setInterval(() => {
+            this.currentTime = new Date();
+        }, 1000);
     }
 
 }

@@ -9,4 +9,5 @@ export interface User {
     isRestaurantOwner: boolean;
     restaurantId: string;
     salary?: string;
+    registerDate: string;
 }

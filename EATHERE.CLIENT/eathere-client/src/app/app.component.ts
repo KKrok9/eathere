@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AuthService } from './services';
+import { AuthService, UserService } from './services';
 import { Router } from '@angular/router';
 
 @Component({
@@ -9,14 +9,11 @@ import { Router } from '@angular/router';
 })
 export class AppComponent {
     title = 'eathere-client';
-
-    constructor(private router: Router, private authService: AuthService) { }
+    constructor(private router: Router, private authService: AuthService, private userService: UserService) { }
 
     ngOnInit(): void {
         this.checkIfTokenExists();
     }
-
-
 
     private checkIfTokenExists(): void {
         var token = localStorage.getItem('jwt');
@@ -30,11 +27,5 @@ export class AppComponent {
 
     get isLoggedIn(): boolean {
         return this.authService.isLoggedIn;
-    }
-
-    logout(): void {
-        this.authService.updateIsLoggedIn(false);
-        localStorage.removeItem('jwt');
-        this.router.navigateByUrl('/');
     }
 }
