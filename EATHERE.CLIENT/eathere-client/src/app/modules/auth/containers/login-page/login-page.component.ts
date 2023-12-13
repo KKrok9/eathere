@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 })
 export class LoginPageComponent {
     fg: FormGroup;
+    errorMessage: string = '';
 
     constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) {
         this.fg = this.getFg();
@@ -23,14 +24,32 @@ export class LoginPageComponent {
     }
 
     login(): void {
-        this.authService.login(this.fg.value).subscribe(response => {
-            if (response.jwt) {
-                //add to local storage jwt 
-                this.authService.updateIsLoggedIn(true);
-                localStorage.setItem('jwt', response.jwt);
-                this.router.navigateByUrl('/home');
+        if (!this.fg) {
+            this.errorMessage = 'Form group is not available';
+            return;
+        }
+        const email = this.fg.get('email')?.value?.trim();
+        const password = this.fg.get('password')?.value?.trim();
+
+        if (!email || !password) {
+            this.errorMessage = 'Email and password are required';
+
+            return;
+        }
+
+        this.authService.login({ email, password }).subscribe(
+            response => {
+                if (response.jwt) {
+                    this.authService.updateIsLoggedIn(true);
+                    localStorage.setItem('jwt', response.jwt);
+                    this.router.navigateByUrl('/home');
+                }
+            },
+            error => {
+                this.errorMessage = 'User not found';
             }
-        })
+        );
     }
+
 
 }

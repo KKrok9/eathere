@@ -21,6 +21,11 @@
         background-color: #36A9AE;
         background-image: linear-gradient(#37ADB2, #329CA0);
 
+        .error-message {
+            color: red;
+            /* Add any other styling as needed */
+        }
+
         .login-container {
             height: 60%;
             width: 60%;
@@ -39,13 +44,12 @@
             }
 
             .login-data-container {
-                height: 50%;
+                height: 70%;
                 width: 100%;
                 display: flex;
-                justify-content: center;
+                justify-content: space-around;
                 align-items: center;
                 flex-direction: column;
-
             }
 
             .login-button-container {

@@ -39,8 +39,9 @@
             <span class="bold">ROLE IN RESTAURANT: {{ user.isRestaurantOwner ? 'Restaurant owner' : 'Worker' }}</span>
         </div>
 
-
-
+        <div *ngIf="user.salary !== null && !user.isRestaurantOwner" class="my-profile-element">
+            <span class="bold">SALARY: {{user.salary}}PLN</span>
+        </div>
         <div *ngIf="user.birthdayDate && !isEdit['birthdayDate'] else enterBirthdayDate" class="my-profile-element">
             <span class="bold">Birthday Date: {{ user.birthdayDate | date:'dd.MM.yyyy' }} </span>
             <button (click)="toggleIsToEdit('birthdayDate')">EDIT</button>
