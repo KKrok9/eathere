@@ -82,7 +82,7 @@ export class AllOrdersPageComponent implements OnInit {
         this.subscription.add(
             this.orderService.getAllOrdersFromRestaurant(this.restaurant.id).subscribe(
                 (response) => {
-                    this.orders = response;
+                    this.orders = response.reverse();
                 },
                 (error) => {
                     console.error(error);
@@ -137,7 +137,8 @@ export class AllOrdersPageComponent implements OnInit {
             restaurantId: order.restaurantId,
             description: order.description,
             orderStatus: order.orderStatus === "ACTIVE" ? "DONE" : "ACTIVE",
-            dishIds: order.dishIds
+            dishIds: order.dishIds,
+            orderDate: order.orderDate
         };
         this.subscription.add(
             this.orderService.updateOrder(updatedOrder).subscribe(() => {

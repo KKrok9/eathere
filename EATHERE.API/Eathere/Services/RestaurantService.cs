@@ -35,18 +35,34 @@ namespace Eathere.Services
         {
             const string allowedChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
             const int codeLength = 5;
-
-            StringBuilder codeBuilder = new StringBuilder(codeLength);
-
-            for (int i = 0; i < codeLength; i++)
+            var restaurants = await _repository.GetAllAsync();
+            while (true)
             {
-                int index = random.Next(allowedChars.Length);
-                char randomChar = allowedChars[index];
-                codeBuilder.Append(randomChar);
-            }
 
-            return codeBuilder.ToString();
+                StringBuilder codeBuilder = new StringBuilder(codeLength);
+
+                for (int i = 0; i < codeLength; i++)
+                {
+                    int index = random.Next(allowedChars.Length);
+                    char randomChar = allowedChars[index];
+                    codeBuilder.Append(randomChar);
+                }
+                string generatedCode = codeBuilder.ToString();
+                bool isCodeUnique = await IsRestaurantCodeUnique(generatedCode, restaurants);
+                if (isCodeUnique)
+                {
+                    return generatedCode;
+                }
+            }
         }
+
+
+        private async Task<bool> IsRestaurantCodeUnique(string code, IEnumerable<Restaurant> restaurants)
+        {
+            var existingRestaurant = restaurants.FirstOrDefault(r => r.RestaurantCode == code);
+            return existingRestaurant == null;
+        }
+
 
         public async Task<IEnumerable<Restaurant>> GetAllRestaurants()
         {

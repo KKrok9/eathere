@@ -46,6 +46,7 @@ p {
         flex-direction: column;
         align-items: center;
         background-color: white;
+        overflow-x: auto;
 
         .description-row {
             border-radius: 12px;
@@ -71,16 +72,18 @@ p {
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 10%;
+            min-height: 10%;
             width: 95%;
             flex-direction: row;
             border-bottom: solid 1px;
 
             .order-column {
                 width: 20%;
+                height: 100%;
                 display: flex;
                 justify-content: center;
                 align-items: center;
+
 
                 button {
                     height: 40px;
@@ -92,8 +95,8 @@ p {
                     font-family: 'Courier New', Courier, monospace;
                     font-weight: bold;
                     transition: background-color 0.3s ease;
-                    border: solid 1px;
                     border-radius: 12px;
+                    border: none
                 }
 
                 button:hover {
@@ -101,6 +104,11 @@ p {
                     color: whitesmoke;
                     border: none;
                 }
+            }
+
+            .scroll {
+                overflow-y: auto;
+                flex-direction: column;
             }
 
             .space-around {

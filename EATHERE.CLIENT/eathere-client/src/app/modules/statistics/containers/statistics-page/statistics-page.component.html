@@ -1,12 +1,20 @@
-<div class="page-container" *ngIf="user.isRestaurantOwner">
+<div class="page-container" *ngIf="user">
     <div class="main-content">
         <div class="money-div">
             <div class="list">
                 <h2>How about your money in this month?</h2>
-                <h3>Income from orders: {{getIncomeFromOrders()}}PLN </h3>
-                <h3>Salaries: {{getSalarySum()}}PLN</h3>
-                <h3>Balance: {{getIncomeFromOrders() - getSalarySum()}}PLN</h3>
-                <h3>Biggest salary:{{getBiggestSalaryOwner()?.name}} {{getBiggestSalaryOwner()?.surname}}
+                <h3 [style.color]="getIncomeFromOrders() > 0 ? 'green' : 'black'">Income from orders:
+                    {{getIncomeFromOrders()}}PLN</h3>
+                <h3 *ngIf="user.isRestaurantOwner" [style.color]="getSalarySum() > 0 ? 'red' : 'black'">Salaries:
+                    {{getSalarySum()}}PLN</h3>
+
+                <h3 *ngIf="user.isRestaurantOwner"
+                    [style.color]="(getIncomeFromOrders() - getSalarySum()) > 0 ? 'green' : 'red'">
+                    Balance: {{getIncomeFromOrders() - getSalarySum()}}PLN
+                </h3>
+
+                <h3 *ngIf="user.isRestaurantOwner">Biggest salary:{{getBiggestSalaryOwner()?.name}}
+                    {{getBiggestSalaryOwner()?.surname}}
                     {{getBiggestSalaryOwner()?.salary}}PLN</h3>
             </div>
         </div>

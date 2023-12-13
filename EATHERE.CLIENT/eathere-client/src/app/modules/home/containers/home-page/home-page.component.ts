@@ -39,7 +39,6 @@ export class HomePageComponent implements OnInit {
     ngOnInit(): void {
         this.getUser();
         this.getRestaurant();
-        this.refreshTime()
     }
 
 
@@ -82,7 +81,7 @@ export class HomePageComponent implements OnInit {
                     this.orders = response;
                     if (this.orders) {
                         this.activeOrders = this.orders.filter(element => element.orderStatus === 'ACTIVE');
-                        this.getOrdersCountFromToday();
+                        this.getOrdersFromToday();
                     }
                 },
                 (error) => {
@@ -112,26 +111,20 @@ export class HomePageComponent implements OnInit {
             restaurantId: order.restaurantId,
             description: order.description,
             orderStatus: "DONE",
-            dishIds: order.dishIds
+            dishIds: order.dishIds,
+            orderDate: order.orderDate
         };
         this.subscription.add(
             this.orderService.updateOrder(updatedOrder).subscribe(() => {
                 this.getOrders();
             })
         );
-        console.log('ok');
+        this.getOrdersFromToday()
     }
 
-    getFreeTablesAndSeatsCount(): void {
-        this.tables.forEach((element) => {
-            if (!element.isTaken) {
-                this.freeTablesCount++;
-                this.freeSeatsCount += element.capacity;
-            }
-        })
-    }
 
-    private getOrdersCountFromToday(): Order[] {
+    private getOrdersFromToday(): Order[] {
+        this.todaysOrders = [];
         const today = new Date();
         return this.orders.filter(element => {
             const orderDate = new Date(element.orderDate);
@@ -175,18 +168,41 @@ export class HomePageComponent implements OnInit {
         return sum;
     }
 
+
+    toggleTableStatus(table: Table): void {
+        if (this.restaurant) {
+            const updatedTable = {
+                id: table.id,
+                name: table.name,
+                capacity: table.capacity,
+                isTaken: !table.isTaken,
+                restaurantId: this.restaurant.id
+            }
+
+            this.tableService.updateTable(updatedTable).subscribe(() => {
+                this.getTables();
+            })
+        }
+    }
+
+    getFreeTablesAndSeatsCount(): void {
+        this.freeSeatsCount = 0;
+        this.freeTablesCount = 0;
+        this.tables.forEach((element) => {
+            if (!element.isTaken) {
+                this.freeTablesCount++;
+                this.freeSeatsCount += element.capacity;
+            }
+        })
+    }
+
+
     private getUser(): void {
         this.subscription.add(
             this.userService.getCurrentlyLoggedUser().subscribe((response) => {
                 this.user = response;
             })
         )
-    }
-
-    private refreshTime(): void {
-        setInterval(() => {
-            this.currentTime = new Date();
-        }, 1000);
     }
 
 }

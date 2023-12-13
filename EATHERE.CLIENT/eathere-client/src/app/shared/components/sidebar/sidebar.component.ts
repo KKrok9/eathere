@@ -8,14 +8,8 @@ import { AuthService, UserService } from 'src/app/services';
     templateUrl: './sidebar.component.html',
     styleUrls: ['./sidebar.component.scss']
 })
-export class SidebarComponent implements OnInit {
-    currentUser!: User;
-    private subscrpiton = new Subscription();
-    constructor(private router: Router, private authService: AuthService, private userService: UserService) { }
-
-    ngOnInit(): void {
-        this.getUser();
-    }
+export class SidebarComponent {
+    constructor(private authService: AuthService) { }
 
     logout(): void {
         this.authService.updateIsLoggedIn(false);
@@ -27,16 +21,4 @@ export class SidebarComponent implements OnInit {
         return this.authService.isLoggedIn;
     }
 
-    private getUser(): void {
-        this.subscrpiton.add(
-            this.userService.getCurrentlyLoggedUser().subscribe(
-                (response) => {
-                    this.currentUser = response;
-                },
-                (error) => {
-                    console.log(error);
-                }
-            )
-        );
-    }
 }

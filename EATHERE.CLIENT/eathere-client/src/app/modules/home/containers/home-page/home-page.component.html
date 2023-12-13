@@ -18,7 +18,7 @@
     </div>
     <div class="main-content">
         <div class="tables-div">
-            <app-tables-form></app-tables-form>
+            <app-tables-form [tables]="tables" (toggleTableStatus)="toggleTableStatus($event)"></app-tables-form>
         </div>
         <div class="active-orders-div">
             <app-active-orders [orders]="activeOrders" [tables]="tables" [dishes]="dishes"

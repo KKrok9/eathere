@@ -33,22 +33,25 @@
             <div class=" order-column">
                 <p>{{ order.description }}</p>
             </div>
-            <div class="order-column">
+            <div class="order-column scroll">
                 <ng-container *ngFor="let dishId of order.dishIds">
                     <p>{{selectNameById(dishes,dishId)}},</p>
                 </ng-container>
             </div>
             <div class="order-column">
-                <p>{{order.orderDate | date:'dd.MM.yyyy'}}</p>
+                <p>{{order.orderDate | date:'HH:mm | dd.MM.yyyy'}}</p>
             </div>
             <div class="order-column">
                 <p>{{calculateOrderPrice(order.dishIds)}}PLN</p>
             </div>
             <div class="order-column space-around">
-                <p>{{order.orderStatus}}</p>
-                <button (click)="toggleOrderStatus(order)"> {{order.orderStatus === 'ACTIVE' ? 'DONE' :
-                    'ACTIVATE'}}</button>
+                <p [style.color]="order.orderStatus === 'ACTIVE' ? 'green' : 'red'">{{order.orderStatus}}</p>
+                <button (click)="toggleOrderStatus(order)"
+                    [ngStyle]="{'background-color': order.orderStatus === 'ACTIVE' ? 'red' : 'green'}">
+                    {{order.orderStatus === 'ACTIVE' ? 'DONE' : 'ACTIVATE'}}
+                </button>
             </div>
+
             <div class="order-column">
                 <button (click)="deleteDish(order.id)">DELETE</button>
             </div>

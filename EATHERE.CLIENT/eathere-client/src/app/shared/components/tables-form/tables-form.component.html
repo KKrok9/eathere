@@ -23,7 +23,7 @@
                 <p>{{table.capacity}}</p>
             </div>
             <div class="table-col">
-                <p>{{table.isTaken ? 'TAKEN' : 'FREE'}}</p>
+                <p [style.color]="table.isTaken ? 'red' : 'green'">{{table.isTaken ? 'TAKEN' : 'FREE'}}</p>
             </div>
             <div class="table-col">
                 <button (click)="toggleStatus(table)">{{table.isTaken ? 'UNBOOK' : 'BOOK'}}</button>
@@ -33,7 +33,7 @@
             </div>
         </div>
     </div>
-    <form [formGroup]="fg" class="buttons-container" (ngSubmit)="addDish()">
+    <form [formGroup]="fg" class="buttons-container" (ngSubmit)="addTable()">
         <input placeholder="NAME" formControlName="name">
         <input placeholder="CAPACITY" formControlName="capacity">
         <button type="submit">ADD</button>
