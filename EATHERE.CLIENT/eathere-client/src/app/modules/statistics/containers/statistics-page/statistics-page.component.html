@@ -54,12 +54,15 @@
         <div class=" third-div">
             <div class="list">
                 <h2>TRENDS OF THE MONTH</h2>
-                <h3>MOST OFTEN ORDERED:{{findMostAndLeastOrderedDishes(thisMonthOrders,dishes).mostOrdered?.name}}
+                <h3 *ngIf="thisMonthOrders.length>0 && dishes">MOST OFTEN
+                    ORDERED:{{findMostAndLeastOrderedDishes(thisMonthOrders,dishes).mostOrdered?.name}}
                 </h3>
-                <h3>LEAST OFTEN ORDERED:{{findMostAndLeastOrderedDishes(thisMonthOrders,dishes).leastOrdered?.name}}
+                <h3 *ngIf="thisMonthOrders.length>0 && dishes">LEAST OFTEN
+                    ORDERED:{{findMostAndLeastOrderedDishes(thisMonthOrders,dishes).leastOrdered?.name}}
                 </h3>
-                <h3>BIGGEST ORDER:{{findMostExpensiveOrder(thisMonthOrders,dishes).totalPrice}}PLN</h3>
-                <h3>ORDERS THIS MONTH: {{thisMonthOrders.length}}</h3>
+                <h3 *ngIf="thisMonthOrders.length>0 && dishes">BIGGEST
+                    ORDER:{{findMostExpensiveOrder(thisMonthOrders,dishes).totalPrice}}PLN</h3>
+                <h3 *ngIf="thisMonthOrders.length>0">ORDERS THIS MONTH: {{thisMonthOrders.length}}</h3>
             </div>
         </div>
     </div>
