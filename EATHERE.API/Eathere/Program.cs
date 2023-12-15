@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Eathere.Services.Interfaces;
 using Eathere.Services;
 using Eathere.Data;
-
+using Eathere.Profiles;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>(); //Pozwala na dostep do http context
@@ -37,6 +37,7 @@ builder.Services.AddCors(options => // pozwala na dostep do zasobow z innych dom
 builder.Services.AddControllers(); // dodaje kontrolery 
 builder.Services.AddEndpointsApiExplorer(); //obsluga api exploreer
 builder.Services.AddSwaggerGen(); // dokumentacja api w oparciu o atrybuty i komentarze w kodzie
+builder.Services.AddAutoMapper(typeof(UserProfile));
 
 var app = builder.Build();
 

@@ -21,7 +21,8 @@
                 </ng-container>
             </div>
             <div class="order-col">
-                <p> {{selectNameById(tables,order.tableId)}}</p>
+                <!-- <p> {{selectNameById(tables,order.tableId)}}</p> -->
+                <p>{{order.table?.name}}</p>
             </div>
             <div class="order-col">
                 <p>{{ order.orderDate | date:'HH:mm' }}</p>

@@ -2,9 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { Dish } from 'src/app/models/dish.model';
+import { DishType } from 'src/app/models/dishType.model';
+import { PortionType } from 'src/app/models/portionType.model';
 import { Restaurant } from 'src/app/models/restaurant.model';
 import { RestaurantService } from 'src/app/services';
 import { DishService } from 'src/app/services/dish.service';
+import { DishTypeService } from 'src/app/services/dishType.service';
+import { PortionTypeService } from 'src/app/services/portionType.service';
 
 @Component({
     selector: 'app-dishes-list-page',
@@ -16,6 +20,8 @@ export class DishesListPageComponent implements OnInit {
     restaurant!: Restaurant;
     dishes: Dish[] = [];
     fg: FormGroup;
+    dishTypes: DishType[] = [];
+    portionTypes: PortionType[] = [];
     isDishModalVisible = false;
     selectedDishId: string | null = null;
 
@@ -24,7 +30,9 @@ export class DishesListPageComponent implements OnInit {
     constructor(
         private dishService: DishService,
         private restaurantService: RestaurantService,
-        private fb: FormBuilder
+        private fb: FormBuilder,
+        private dishTypeService: DishTypeService,
+        private portionTypeService: PortionTypeService,
     ) {
         this.fg = this.getFg();
     }
@@ -40,6 +48,8 @@ export class DishesListPageComponent implements OnInit {
                     this.restaurant = response;
                     if (this.restaurant) {
                         this.loadDishes();
+                        this.getDishTypes();
+                        this.getPortionTypes();
                     }
                 },
                 (error) => {
@@ -83,7 +93,9 @@ export class DishesListPageComponent implements OnInit {
                 proteins: this.fg.value.proteins,
                 fats: this.fg.value.fats,
                 carbohydrates: this.fg.value.carbohydrates,
-                restaurantId: this.restaurant.id
+                restaurantId: this.restaurant.id,
+                dishTypeId: this.fg.value.dishType,
+                portionTypeId: this.fg.value.portionType
             };
 
             this.subscription.add(
@@ -113,12 +125,40 @@ export class DishesListPageComponent implements OnInit {
             calories: "",
             proteins: "",
             fats: "",
-            carbohydrates: ""
+            carbohydrates: "",
+            dishType: "",
+            portionType: ""
         });
     }
 
     openModal(dishId: string): void {
         this.selectedDishId = dishId;
         this.isDishModalVisible = true;
+    }
+
+    getDishTypes(): void {
+        this.subscription.add(
+            this.dishTypeService.getAllDishTypesFromRestaurant(this.restaurant.id).subscribe(
+                (response) => {
+                    this.dishTypes = response;
+                },
+                (error) => {
+                    console.log(error);
+                }
+            )
+        )
+    }
+
+    getPortionTypes(): void {
+        this.subscription.add(
+            this.portionTypeService.getAllPortionTypesFromRestaurant(this.restaurant.id).subscribe(
+                (response) => {
+                    this.portionTypes = response;
+                },
+                (error) => {
+                    console.log(error);
+                }
+            )
+        )
     }
 }

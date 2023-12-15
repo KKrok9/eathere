@@ -1,3 +1,6 @@
+import { DishType } from "./dishType.model";
+import { PortionType } from "./portionType.model";
+
 export interface Dish {
     id: string;
     name: string;
@@ -11,4 +14,6 @@ export interface Dish {
     portionTypeId: string;
     dishTypeId: string;
     restaurantId: string;
+    dishType: DishType,
+    portionType: PortionType,
 }

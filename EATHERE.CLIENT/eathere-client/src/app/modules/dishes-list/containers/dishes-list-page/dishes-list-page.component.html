@@ -20,6 +20,22 @@
         </div>
         <div class="second-row">
             <div class="add-dish-btn-div">
+                <div>
+                    <p>DISH TYPE</p>
+                    <select formControlName="dishType">
+                        <option *ngFor="let dishType of dishTypes" [value]="dishType.id">{{ dishType.name }}
+                        </option>
+                    </select>
+                </div>
+                <div>
+                    <p>PORTION TYPE</p>
+                    <select formControlName="portionType">
+                        <option *ngFor="let portionType of portionTypes" [value]="portionType.id">{{
+                            portionType.name }}
+                        </option>
+                    </select>
+                </div>
+
                 <button type="submit">Add Dish</button>
             </div>
         </div>

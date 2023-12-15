@@ -1,3 +1,4 @@
+import { Table } from "./table.model";
 
 export interface Order {
     id: string;
@@ -8,4 +9,5 @@ export interface Order {
     orderStatus: string;
     dishIds: string[];
     orderDate: Date;
+    table?: Table;
 }

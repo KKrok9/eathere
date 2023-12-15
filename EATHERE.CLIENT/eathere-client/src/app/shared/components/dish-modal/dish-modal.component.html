@@ -33,6 +33,14 @@
             <p>Carbohydrates:</p>
             <input formControlName="carbohydrates">
         </div>
+        <div *ngIf="dish.dishType" class="form-row">
+            <p>Dish Type:</p>
+            <p>{{dish.dishType.name}}</p>
+        </div>
+        <div *ngIf="dish.portionType" class="form-row">
+            <p>Portion Type:</p>
+            <p>{{dish.portionType.name}}</p>
+        </div>
         <button type="submit">SAVE DISH</button>
     </form>
 </div>
