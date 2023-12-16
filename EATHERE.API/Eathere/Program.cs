@@ -37,7 +37,7 @@ builder.Services.AddCors(options => // pozwala na dostep do zasobow z innych dom
 builder.Services.AddControllers(); // dodaje kontrolery 
 builder.Services.AddEndpointsApiExplorer(); //obsluga api exploreer
 builder.Services.AddSwaggerGen(); // dokumentacja api w oparciu o atrybuty i komentarze w kodzie
-builder.Services.AddAutoMapper(typeof(UserProfile));
+builder.Services.AddAutoMapper(typeof(WorkerProfile));
 
 var app = builder.Build();
 

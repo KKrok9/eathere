@@ -7,6 +7,7 @@ import { PortionType } from 'src/app/models/portionType.model';
 import { Restaurant } from 'src/app/models/restaurant.model';
 import { Table } from 'src/app/models/table.model';
 import { User } from 'src/app/models/user.model';
+import { WorkerDto } from 'src/app/models/worker-dto.model';
 import { DishService, OrderService, RestaurantService, TableService, UserService, WorkerService } from 'src/app/services';
 import { DishTypeService } from 'src/app/services/dishType.service';
 import { PortionTypeService } from 'src/app/services/portionType.service';
@@ -19,7 +20,7 @@ import { PortionTypeService } from 'src/app/services/portionType.service';
 export class StatisticsPageComponent implements OnInit {
 
     restaurant!: Restaurant;
-    workers: User[] = []; //TO CHANGE!
+    workers: WorkerDto[] = []; //TO CHANGE!
     orders: Order[] = [];
     thisMonthOrders: Order[] = [];
     dishes: Dish[] = [];
@@ -154,8 +155,8 @@ export class StatisticsPageComponent implements OnInit {
         return price;
     }
 
-    getBiggestSalaryOwner(): User | null {
-        let userToReturn: User | null = null;
+    getBiggestSalaryOwner(): WorkerDto | null {
+        let userToReturn: WorkerDto | null = null;
         let biggestSalary = 0;
 
         this.workers.forEach((element) => {

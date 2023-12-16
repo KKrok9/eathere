@@ -1,4 +1,5 @@
-﻿using Eathere.Models;
+﻿using Eathere.DTOs;
+using Eathere.Models;
 
 namespace Eathere.Services.Interfaces
 {
@@ -6,7 +7,7 @@ namespace Eathere.Services.Interfaces
     {
         Task<IEnumerable<User>> GetAllWorkersFromRestaurant(); //NEED TO CHANGE USER INTO SOME DTO and MAP IT 
         Task<User> GetWorkerById(Guid id);
-        Task RemoveUserFromRestaurant(User worker);
-        Task UpdateWorker(User worker);
+        Task RemoveUserFromRestaurant(WorkerDto worker);
+        Task UpdateWorker(WorkerDto worker);
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace Eathere.DTOs
 {
-    public class UserDto
+    public class WorkerDto
     {
         public Guid Id { get; set; }
         public string Name { get; set; }

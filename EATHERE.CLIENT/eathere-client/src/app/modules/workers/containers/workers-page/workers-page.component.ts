@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { User } from 'src/app/models/user.model';
+import { WorkerDto } from 'src/app/models/worker-dto.model';
 import { UserService } from 'src/app/services';
 import { WorkerService } from 'src/app/services/worker.service';
 
@@ -10,7 +11,7 @@ import { WorkerService } from 'src/app/services/worker.service';
     styleUrls: ['./workers-page.component.scss']
 })
 export class WorkersPageComponent implements OnInit {
-    workers: User[] = []; //TO CHANGE!
+    workers: WorkerDto[] = []; //TO CHANGE!
     currentUser!: User;
     private subscrpiton = new Subscription();
     isEditSalaryFieldVisible: boolean[] = [];
@@ -49,7 +50,7 @@ export class WorkersPageComponent implements OnInit {
         )
     }
 
-    fireWorker(worker: User): void {
+    fireWorker(worker: WorkerDto): void {
         this.subscrpiton.add(
             this.workerService.removeWorkerFromRestaurant(worker).subscribe(
                 (response) => {
@@ -68,12 +69,11 @@ export class WorkersPageComponent implements OnInit {
         this.isEditSalaryFieldVisible[index] = !this.isEditSalaryFieldVisible[index];
     }
 
-    setWorkerSalary(worker: User, salary: string, index: number): void {
+    setWorkerSalary(worker: WorkerDto, salary: string, index: number): void {
         const updatedWorker = { ...worker, salary: salary };
         this.subscrpiton.add(
             this.workerService.updateWorker(updatedWorker).subscribe(
                 (response) => {
-                    console.log(response);
                     this.getWorkers();
                     this.toggleEditSalaryVisible(index);
                 },
