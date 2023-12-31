@@ -1,14 +1,14 @@
 <div class="form-wrapper">
     <div class="description-row">
         <div class="order-col">
-            <p>Order</p>
+            <p>ZAMÓWIENIE</p>
         </div>
         <div class="order-col">
-            <p>Table</p>
+            <p>STOLIK</p>
         </div>
 
         <div class="order-col">
-            <p>Made at</p>
+            <p>GODZINA</p>
         </div>
         <div class="order-col">
         </div>
@@ -28,7 +28,7 @@
                 <p>{{ order.orderDate | date:'HH:mm' }}</p>
             </div>
             <div class="order-col">
-                <button (click)="makeOrderDone(order)">DONE</button>
+                <button (click)="makeOrderDone(order)">ZAKOŃCZ</button>
             </div>
         </div>
     </div>

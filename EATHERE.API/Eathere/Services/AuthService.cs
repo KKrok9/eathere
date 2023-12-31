@@ -16,7 +16,6 @@ namespace Eathere.Services
         private readonly ISqlRepository<User> _repository;
         private readonly IConfiguration _configuration;
         private readonly IHttpContextAccessor _httpContextAccessor;
-        private Guid? _loggedInUserId;
         public AuthService(ISqlRepository<User> repository, IConfiguration configuration, IHttpContextAccessor httpContextAccessor)
         {
             _repository = repository;

@@ -1,10 +1,10 @@
 <div *ngIf="user != null" class="page-wrapper">
-    <h2>YOUR PROFILE</h2>
+    <h2>TWÓJ PROFIL</h2>
     <form [formGroup]="fg" (ngSubmit)="updateUser()" class="profile-container">
 
         <div *ngIf="user.name && !isEdit['name'] else enterName" class="my-profile-element">
-            <span class="bold">NAME: {{ user.name }}</span>
-            <button (click)="toggleIsToEdit('name')">EDIT</button>
+            <span class="bold">IMIĘ: {{ user.name }}</span>
+            <button (click)="toggleIsToEdit('name')">EDYTUJ</button>
         </div>
         <ng-template #enterName>
             <div class="my-profile-element-edit">
@@ -14,8 +14,8 @@
         </ng-template>
 
         <div *ngIf="user.surname && !isEdit['surname'] else entersurname" class="my-profile-element">
-            <span class="bold">SURNAME: {{ user.surname }}</span>
-            <button (click)="toggleIsToEdit('surname')">EDIT</button>
+            <span class="bold">NAZWISKO: {{ user.surname }}</span>
+            <button (click)="toggleIsToEdit('surname')">EDYTUJ</button>
         </div>
         <ng-template #entersurname>
             <div class="my-profile-element-edit">
@@ -26,7 +26,7 @@
 
         <div *ngIf="user.email && !isEdit['email'] else enterEmail" class="my-profile-element">
             <span class="bold">EMAIL: {{ user.email }}</span>
-            <button (click)="toggleIsToEdit('email')">EDIT</button>
+            <button (click)="toggleIsToEdit('email')">EDYTUJ</button>
         </div>
         <ng-template #enterEmail>
             <div class="my-profile-element-edit">
@@ -36,15 +36,15 @@
         </ng-template>
 
         <div *ngIf="user.isRestaurantOwner !== null" class="my-profile-element">
-            <span class="bold">ROLE IN RESTAURANT: {{ user.isRestaurantOwner ? 'Restaurant owner' : 'Worker' }}</span>
+            <span class="bold">ROLA: {{ user.isRestaurantOwner ? 'Restaurant owner' : 'Worker' }}</span>
         </div>
 
         <div *ngIf="user.salary !== null && !user.isRestaurantOwner" class="my-profile-element">
             <span class="bold">SALARY: {{user.salary}}PLN</span>
         </div>
         <div *ngIf="user.birthdayDate && !isEdit['birthdayDate'] else enterBirthdayDate" class="my-profile-element">
-            <span class="bold">Birthday Date: {{ user.birthdayDate | date:'dd.MM.yyyy' }} </span>
-            <button (click)="toggleIsToEdit('birthdayDate')">EDIT</button>
+            <span class="bold">URODZONY: {{ user.birthdayDate | date:'dd.MM.yyyy' }} </span>
+            <button (click)="toggleIsToEdit('birthdayDate')">EDYTUJ</button>
         </div>
         <ng-template #enterBirthdayDate>
             <div class="my-profile-element-edit">
@@ -55,8 +55,8 @@
 
         <div *ngIf="user.contactNumber !== null && !isEdit['contactNumber'] else enterContactNumber"
             class="my-profile-element">
-            <span class="bold">Contact number: {{ user.contactNumber }}</span>
-            <button (click)="toggleIsToEdit('contactNumber')">EDIT</button>
+            <span class="bold">NUMER KONTAKTOWY: {{ user.contactNumber }}</span>
+            <button (click)="toggleIsToEdit('contactNumber')">EDYTUJ</button>
         </div>
         <ng-template #enterContactNumber>
             <div class="my-profile-element-edit">
@@ -66,7 +66,7 @@
         </ng-template>
 
         <div class="save-button-div">
-            <button class="save-button" type="submit">SAVE</button>
+            <button class="save-button" type="submit">ZAPISZ</button>
         </div>
     </form>
 </div>

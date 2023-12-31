@@ -1,13 +1,13 @@
 <div class="form-wrapper">
     <div class="description-row">
         <div class="table-col">
-            <p>Table name</p>
+            <p>NAZWA</p>
         </div>
         <div class="table-col">
-            <p>Capacity</p>
+            <p>POJEMNOŚĆ</p>
         </div>
         <div class="table-col">
-            <p>Status</p>
+            <p>STATUS</p>
         </div>
         <div class="table-col">
         </div>
@@ -23,19 +23,19 @@
                 <p>{{table.capacity}}</p>
             </div>
             <div class="table-col">
-                <p [style.color]="table.isTaken ? 'red' : 'green'">{{table.isTaken ? 'TAKEN' : 'FREE'}}</p>
+                <p [style.color]="table.isTaken ? 'red' : 'green'">{{table.isTaken ? 'ZAJĘTY' : 'WOLNY'}}</p>
             </div>
             <div class="table-col">
-                <button (click)="toggleStatus(table)">{{table.isTaken ? 'UNBOOK' : 'BOOK'}}</button>
+                <button (click)="toggleStatus(table)">{{table.isTaken ? 'ZWOLNIJ' : 'REZERWUJ'}}</button>
             </div>
             <div class="table-col">
-                <button (click)="deleteTable(table.id)">DELETE</button>
+                <button (click)="deleteTable(table.id)">USUŃ</button>
             </div>
         </div>
     </div>
     <form [formGroup]="fg" class="buttons-container" (ngSubmit)="addTable()">
-        <input placeholder="NAME" formControlName="name">
-        <input placeholder="CAPACITY" formControlName="capacity">
-        <button type="submit">ADD</button>
+        <input placeholder="NAZWA" formControlName="name">
+        <input placeholder="POJEMNOŚĆ" formControlName="capacity">
+        <button type="submit">DODAJ</button>
     </form>
 </div>

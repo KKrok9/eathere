@@ -2,33 +2,33 @@
     <form [formGroup]="fg" *ngIf="restaurant!==null" class="form-container" (ngSubmit)="addDish()">
         <div class="first-row">
             <div class="first-column">
-                <input placeholder="Name" formControlName="name">
-                <input placeholder="Price" formControlName="price">
+                <input placeholder="NAZWA" formControlName="name">
+                <input placeholder="CENA" formControlName="price">
             </div>
             <div class="second-column">
-                <input placeholder="Ingredients" formControlName="ingredients">
+                <input placeholder="SKŁADNIKI" formControlName="ingredients">
             </div>
             <div class="third-column">
-                <input placeholder="Description" formControlName="description">
+                <input placeholder="OPIS" formControlName="description">
             </div>
             <div class="fourth-column">
-                <input placeholder="Calories" formControlName="calories">
-                <input placeholder="Proteins" formControlName="proteins">
-                <input placeholder="Fats" formControlName="fats">
-                <input placeholder="Carbs" formControlName="carbohydrates">
+                <input placeholder="KALORIE" formControlName="calories">
+                <input placeholder="BIAŁKA" formControlName="proteins">
+                <input placeholder="TŁUSZCZE" formControlName="fats">
+                <input placeholder="WĘGLOWODANY" formControlName="carbohydrates">
             </div>
         </div>
         <div class="second-row">
             <div class="add-dish-btn-div">
                 <div>
-                    <p>DISH TYPE</p>
+                    <p>TYP DANIA</p>
                     <select formControlName="dishType">
                         <option *ngFor="let dishType of dishTypes" [value]="dishType.id">{{ dishType.name }}
                         </option>
                     </select>
                 </div>
                 <div>
-                    <p>PORTION TYPE</p>
+                    <p>TYP PORCJI</p>
                     <select formControlName="portionType">
                         <option *ngFor="let portionType of portionTypes" [value]="portionType.id">{{
                             portionType.name }}
@@ -36,26 +36,26 @@
                     </select>
                 </div>
 
-                <button type="submit">Add Dish</button>
+                <button type="submit">DODAJ DANIE</button>
             </div>
         </div>
     </form>
     <div class="table-container">
         <div class="description-row">
             <div class="dish-column">
-                <p>Dish</p>
+                <p>DANIE</p>
             </div>
             <div class="dish-column">
-                <p>Price</p>
+                <p>CENA</p>
             </div>
             <div class="dish-column">
-                <p>Ingredients</p>
+                <p>SKŁADNIKI</p>
             </div>
             <div class="dish-column">
-                <p>Description</p>
+                <p>OPIS</p>
             </div>
             <div class="dish-column">
-                <p>Calories</p>
+                <p>KALORIE</p>
             </div>
             <div class="dish-column">
                 <p></p>

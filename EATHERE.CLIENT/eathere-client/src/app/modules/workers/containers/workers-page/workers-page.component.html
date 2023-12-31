@@ -22,7 +22,7 @@
         </div>
         <div *ngFor="let worker of workers; let i = index" class="worker-row">
             <div class="worker-column">
-                <p *ngIf="worker.isRestaurantOwner">BOSS-</p>
+                <p *ngIf="worker.isRestaurantOwner">(BOSS)</p>
                 <p>{{worker.name}} {{worker.surname}}</p>
                 <p *ngIf="worker.id==currentUser.id">(YOU)</p>
             </div>
@@ -52,7 +52,7 @@
                 <p>{{worker.contactNumber}}</p>
             </div>
             <div *ngIf="currentUser.isRestaurantOwner" class="worker-column">
-                <button (click)="fireWorker(worker)">FIRE</button>
+                <button (click)="fireWorker(worker)" *ngIf="currentUser.id !== worker.id">FIRE</button>
             </div>
         </div>
     </div>
